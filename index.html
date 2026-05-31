@@ -6,37 +6,136 @@
 <meta property="og:title" content="Sanket & Sneha — Getting Married!">
 <meta property="og:description" content="Join us on 24–25 November 2026 at Marigold Banquets, Pune.">
 <meta property="og:image" content="photo-together.jpg">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💍</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="shared.css">
 <style>
-/* HERO */
-#hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;}
-.hero-canvas{position:absolute;inset:0;z-index:0;}
-.hero-photo{position:absolute;inset:0;z-index:0;background:url('photo-auto.jpg') center 25% / cover no-repeat;}
-.hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(160deg,rgba(26,12,4,.78) 0%,rgba(45,25,10,.72) 40%,rgba(80,30,10,.62) 80%,rgba(26,12,4,.75) 100%);}
-.hero-content{position:relative;z-index:2;padding:0 24px;}
-.hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:24px;opacity:0;animation:fadeUp .8s .3s forwards;}
-.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:28px;height:1px;background:rgba(255,255,255,.25);}
-.hero-name-wrap{overflow:hidden;margin-bottom:4px;}
-.hero-name{font-family:'Cormorant',serif;font-size:clamp(72px,11vw,150px);font-weight:300;line-height:.95;color:#fff;letter-spacing:-.02em;display:block;opacity:0;transform:translateY(100%);animation:slideUp .9s cubic-bezier(.16,1,.3,1) forwards;}
-.n1{animation-delay:.5s;}.n2{animation-delay:.9s;}
-.amp{font-style:italic;color:var(--yellow);font-size:clamp(60px,9vw,130px);opacity:0;animation:slideUp .9s cubic-bezier(.16,1,.3,1) .7s forwards;}
-.hero-meta{margin-top:32px;opacity:0;animation:fadeUp .8s 1.2s forwards;}
-.hero-date-badge{display:inline-flex;align-items:center;border:1px solid rgba(255,255,255,.2);border-radius:60px;overflow:hidden;backdrop-filter:blur(10px);background:rgba(255,255,255,.08);}
+/* ══════════════════════════════
+   SCROLL-EXPAND HERO
+══════════════════════════════ */
+#hero{
+  min-height:100vh;position:relative;
+  overflow:hidden;
+  /* lock scroll until expanded */
+}
+/* background — fades out as photo expands */
+.hero-bg{
+  position:absolute;inset:0;z-index:0;
+  background:url('photo-together.jpg') center 20%/cover no-repeat;
+  transition:opacity .1s linear;
+}
+.hero-bg-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(160deg,rgba(26,12,4,.72),rgba(45,25,10,.65),rgba(80,30,10,.55));
+  transition:opacity .1s linear;
+}
+/* expanding photo frame */
+.hero-frame{
+  position:absolute;top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  z-index:2;
+  border-radius:20px;overflow:hidden;
+  box-shadow:0 0 60px rgba(0,0,0,.4);
+  transition:width .05s linear,height .05s linear;
+  /* initial small size set by JS */
+}
+.hero-frame img{
+  width:100%;height:100%;
+  object-fit:cover;object-position:center 20%;
+  display:block;
+}
+.hero-frame-overlay{
+  position:absolute;inset:0;
+  background:rgba(0,0,0,.35);
+  transition:opacity .1s linear;
+}
+/* title text — splits and moves outward */
+.hero-names-wrap{
+  position:absolute;inset:0;z-index:3;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  pointer-events:none;gap:0;
+}
+.hero-name-sanket{
+  font-family:'Cormorant',serif;
+  font-size:clamp(72px,11vw,150px);font-weight:300;line-height:.95;
+  color:#fff;letter-spacing:-.02em;
+  transition:transform .05s linear;
+  will-change:transform;
+}
+.hero-name-amp{
+  font-family:'Cormorant',serif;
+  font-size:clamp(60px,9vw,130px);font-weight:300;
+  font-style:italic;color:var(--yellow);line-height:1.1;
+}
+.hero-name-sneha{
+  font-family:'Cormorant',serif;
+  font-size:clamp(72px,11vw,150px);font-weight:300;line-height:.95;
+  color:#fff;letter-spacing:-.02em;
+  transition:transform .05s linear;
+  will-change:transform;
+}
+/* scroll hint */
+.hero-scroll-hint{
+  position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
+  z-index:4;display:flex;flex-direction:column;align-items:center;gap:8px;
+  pointer-events:none;transition:opacity .3s;
+}
+.hsh-text{
+  font-size:10px;letter-spacing:.2em;text-transform:uppercase;
+  color:rgba(255,255,255,.45);display:flex;align-items:center;gap:8px;
+}
+.hsh-text::before,.hsh-text::after{content:'';width:20px;height:1px;background:rgba(255,255,255,.25);}
+.hsh-arrow{font-size:18px;color:rgba(255,255,255,.35);animation:bounceDown 1.5s ease-in-out infinite;}
+@keyframes bounceDown{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+/* hero meta — date + location */
+.hero-meta-bar{
+  position:absolute;bottom:44px;left:50%;transform:translateX(-50%);
+  z-index:4;display:flex;flex-direction:column;align-items:center;gap:10px;
+  opacity:0;pointer-events:none;transition:opacity .4s;
+}
+.hero-meta-bar.visible{opacity:1;pointer-events:auto;}
+.hero-date-badge{
+  display:inline-flex;align-items:center;
+  border:1px solid rgba(255,255,255,.2);border-radius:60px;
+  overflow:hidden;backdrop-filter:blur(10px);background:rgba(255,255,255,.08);
+}
 .hdb{padding:11px 22px;font-size:13px;font-weight:500;letter-spacing:.06em;color:rgba(255,255,255,.88);border-right:1px solid rgba(255,255,255,.12);}
 .hdb:last-child{border-right:none;}.hdb.accent{background:var(--coral);}
-.hero-loc{margin-top:14px;font-size:14px;color:rgba(255,255,255,.45);display:flex;align-items:center;justify-content:center;gap:6px;}
-.hero-loc a{color:rgba(255,255,255,.72);text-decoration:none;transition:color .2s;}.hero-loc a:hover{color:var(--yellow);}
-.hero-ctas{display:flex;align-items:center;justify-content:center;gap:14px;margin-top:36px;opacity:0;animation:fadeUp .8s 1.4s forwards;flex-wrap:wrap;}
-.hero-countdown{position:absolute;bottom:36px;left:50%;transform:translateX(-50%);display:flex;z-index:2;opacity:0;animation:fadeUp .8s 1.6s forwards;}
+.hero-loc{font-size:14px;color:rgba(255,255,255,.5);display:flex;align-items:center;gap:6px;}
+.hero-loc a{color:rgba(255,255,255,.75);text-decoration:none;transition:color .2s;}
+.hero-loc a:hover{color:var(--yellow);}
+.hero-ctas-bar{
+  display:flex;gap:14px;flex-wrap:wrap;justify-content:center;
+  opacity:0;pointer-events:none;transition:opacity .5s .1s;
+}
+.hero-ctas-bar.visible{opacity:1;pointer-events:auto;}
+/* countdown */
+.hero-countdown{
+  position:absolute;top:36px;left:50%;transform:translateX(-50%);
+  display:flex;z-index:4;opacity:0;pointer-events:none;transition:opacity .4s;
+}
+.hero-countdown.visible{opacity:1;}
 .hc-block{padding:10px 18px;text-align:center;border-right:1px solid rgba(255,255,255,.12);}
 .hc-block:last-child{border-right:none;}
 .hc-num{font-family:'Cormorant',serif;font-size:32px;font-weight:300;color:#fff;line-height:1;}
 .hc-label{font-size:9px;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:3px;}
-.scroll-ind{position:absolute;bottom:36px;right:48px;z-index:2;display:flex;flex-direction:column;align-items:center;gap:8px;opacity:0;animation:fadeUp .8s 2s forwards;}
-.scroll-ind span{font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:rgba(255,255,255,.3);}
-.scroll-line{width:1px;height:48px;background:linear-gradient(to bottom,rgba(255,255,255,.3),transparent);animation:scrollDown 2s ease-in-out infinite;}
-@keyframes scrollDown{0%{transform:scaleY(0);transform-origin:top;}50%{transform:scaleY(1);transform-origin:top;}51%{transform:scaleY(1);transform-origin:bottom;}100%{transform:scaleY(0);transform-origin:bottom;}}
+/* particles canvas */
+.hero-canvas{position:absolute;inset:0;z-index:1;pointer-events:none;}
+/* eyebrow */
+.hero-eyebrow{
+  position:absolute;top:calc(var(--nav-h) + 24px);left:50%;transform:translateX(-50%);
+  z-index:4;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);display:flex;align-items:center;gap:10px;
+  opacity:0;animation:fadeUp .8s .3s forwards;pointer-events:none;
+}
+.hero-eyebrow::before,.hero-eyebrow::after{content:'';width:28px;height:1px;background:rgba(255,255,255,.25);}
+
+/* ══════════════════════════════
+   CONTENT BELOW HERO (post-expand)
+══════════════════════════════ */
+.post-hero{opacity:0;transform:translateY(24px);transition:opacity .7s,transform .7s;}
+.post-hero.visible{opacity:1;transform:translateY(0);}
 
 /* ABOUT */
 #about{padding:100px 48px;background:var(--cream);overflow:hidden;position:relative;}
@@ -60,6 +159,7 @@
 .chip.pink{border-color:var(--pink);color:var(--pink);background:rgba(224,92,138,.06);}
 .chip.yellow{border-color:var(--yellow);color:var(--yellow-d);background:rgba(245,166,35,.1);}
 .chip.lime{border-color:var(--lime);color:var(--lime-d);background:rgba(107,191,58,.06);}
+.chip.purple{border-color:var(--purple-d);color:var(--purple-d);background:var(--purple-l);}
 .about-cta{margin-top:32px;display:flex;gap:12px;flex-wrap:wrap;}
 
 /* FEATURES */
@@ -197,13 +297,13 @@
   .form-row,.attend-row{grid-template-columns:1fr;}
   .rsvp-box{padding:28px 20px;}
   .attire-cta-banner{flex-direction:column;}
-  .scroll-ind{display:none;}
 }
 </style>
 </head>
 <body>
 <div id="cursor"></div><div id="cursor-ring"></div>
 
+<!-- NAV -->
 <nav class="main-nav" id="main-nav">
   <a href="index.html" class="nav-logo">S & S</a>
   <div class="nav-links">
@@ -229,36 +329,55 @@
   <a href="#rsvp" onclick="closeMenu()" style="color:var(--coral)">RSVP →</a>
 </div>
 
-<!-- HERO -->
+<!-- ══════════════════════════════
+     SCROLL-EXPAND HERO
+══════════════════════════════ -->
 <section id="hero">
-  <div class="hero-photo"></div>
-  <div class="hero-overlay"></div>
+  <!-- Background (fades out) -->
+  <div class="hero-bg" id="hero-bg"></div>
+  <div class="hero-bg-overlay" id="hero-bg-overlay"></div>
+  <!-- Particles -->
   <canvas class="hero-canvas" id="heroCanvas"></canvas>
-  <div class="hero-content">
-    <div class="hero-eyebrow">You are cordially invited</div>
-    <div class="hero-name-wrap"><span class="hero-name n1">Sanket</span></div>
-    <div class="hero-name-wrap"><span class="hero-name amp">&</span></div>
-    <div class="hero-name-wrap"><span class="hero-name n2">Sneha</span></div>
-    <div class="hero-meta">
-      <div class="hero-date-badge">
-        <div class="hdb">24 Nov</div><div class="hdb accent">25 Nov</div>
-        <div class="hdb">2026</div><div class="hdb">Pune, India</div>
-      </div>
-      <div class="hero-loc">📍 <a href="https://maps.app.goo.gl/HEEg9PPyY22yJDSi9" target="_blank">Marigold Banquets, Pune</a></div>
-    </div>
-    <div class="hero-ctas">
-      <a href="#rsvp" class="btn-primary">RSVP Now</a>
-      <a href="story.html" class="btn-outline-white">Our Story</a>
-    </div>
+  <!-- Expanding photo frame -->
+  <div class="hero-frame" id="hero-frame">
+    <img src="photo-auto.jpg" alt="Sanket and Sneha" id="hero-frame-img">
+    <div class="hero-frame-overlay" id="hero-frame-overlay"></div>
   </div>
+  <!-- Names — split outward -->
+  <div class="hero-names-wrap">
+    <div class="hero-eyebrow">You are cordially invited</div>
+    <div class="hero-name-sanket" id="name-sanket">Sanket</div>
+    <div class="hero-name-amp">&</div>
+    <div class="hero-name-sneha" id="name-sneha">Sneha</div>
+  </div>
+  <!-- Scroll hint (hidden when expanded) -->
+  <div class="hero-scroll-hint" id="scroll-hint">
+    <div class="hsh-text">Scroll to begin</div>
+    <div class="hsh-arrow">↓</div>
+  </div>
+  <!-- Meta bar — appears when expanded -->
+  <div class="hero-meta-bar" id="hero-meta">
+    <div class="hero-date-badge">
+      <div class="hdb">24 Nov</div><div class="hdb accent">25 Nov</div>
+      <div class="hdb">2026</div><div class="hdb">Pune, India</div>
+    </div>
+    <div class="hero-loc">📍 <a href="https://maps.app.goo.gl/HEEg9PPyY22yJDSi9" target="_blank">Marigold Banquets, Pune</a></div>
+  </div>
+  <!-- CTAs -->
+  <div class="hero-ctas-bar" id="hero-ctas" style="position:absolute;bottom:120px;left:50%;transform:translateX(-50%);z-index:4;">
+    <a href="#rsvp" class="btn-primary">RSVP Now</a>
+    <a href="story.html" class="btn-outline-white">Our Story</a>
+  </div>
+  <!-- Countdown (top) -->
   <div class="hero-countdown" id="hcdown">
     <div class="hc-block"><div class="hc-num" id="hc-d">—</div><div class="hc-label">Days</div></div>
     <div class="hc-block"><div class="hc-num" id="hc-h">—</div><div class="hc-label">Hours</div></div>
     <div class="hc-block"><div class="hc-num" id="hc-m">—</div><div class="hc-label">Mins</div></div>
     <div class="hc-block"><div class="hc-num" id="hc-s">—</div><div class="hc-label">Secs</div></div>
   </div>
-  <div class="scroll-ind"><span>Scroll</span><div class="scroll-line"></div></div>
 </section>
+
+<div class="post-hero" id="post-hero">
 
 <!-- ABOUT -->
 <section id="about">
@@ -266,7 +385,7 @@
     <div class="about-grid">
       <div class="reveal-left">
         <div class="about-frame">
-          <img src="photo-auto.jpg" alt="Sanket and Sneha" style="object-position:center 25%">
+          <img src="photo-together.jpg" alt="Sanket and Sneha" style="object-position:center 15%">
           <div class="about-label"><h3>Sanket & Sneha</h3><p>November 2026 · Pune</p></div>
         </div>
         <div class="about-float"><span class="big">2026</span>The year it all begins</div>
@@ -274,7 +393,7 @@
       <div class="about-text reveal-right">
         <div class="section-label sl-coral">About us</div>
         <h2 class="section-title">Two souls, <em>one journey</em></h2>
-        <p>Add your love story here — how you met, what made you fall for each other, and what this day means to you. Let your guests feel the magic before they even arrive.</p>
+        <p>Add your love story here — how you met, what made you fall for each other, and what this day means to you.</p>
         <p>Whether it was serendipity, years of friendship, or love at first sight — this is your space to share it.</p>
         <div class="chips">
           <span class="chip coral">Sneha — The Bride</span>
@@ -284,13 +403,14 @@
         </div>
         <div class="about-cta">
           <a href="story.html" class="btn-primary">Read our story →</a>
+          <a href="people.html" class="btn-outline-dark">Meet our people →</a>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- FEATURES / HIGHLIGHTS -->
+<!-- FEATURES -->
 <section id="features">
   <div class="features-inner">
     <div class="features-header">
@@ -301,48 +421,12 @@
       <a href="highlights.html" class="btn-outline-white reveal">All highlights →</a>
     </div>
     <div class="features-grid">
-      <div class="feature-card reveal d1">
-        <div class="feature-icon fi-coral">🌸</div>
-        <h3>Haldi Ceremony</h3>
-        <p>A vibrant turmeric ritual to bless the couple. Wear something bright — expect to get colourful!</p>
-        <span class="fc-tag ft-coral">24 Nov · 4pm</span>
-        <a href="highlights.html#haldi" class="feature-cta"><span>See details</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-      </div>
-      <div class="feature-card reveal d2">
-        <div class="feature-icon fi-yellow">🎶</div>
-        <h3>Sangeet Night</h3>
-        <p>An evening of music, dance, and celebration. Bring your best moves and most festive outfit!</p>
-        <span class="fc-tag ft-yellow">24 Nov · Evening</span>
-        <a href="highlights.html#sangeet" class="feature-cta"><span>See details</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-      </div>
-      <div class="feature-card reveal d3">
-        <div class="feature-icon fi-lime">🙏</div>
-        <h3>Vidhi — Rituals</h3>
-        <p>Beautiful traditional pre-wedding rituals marking the sacred beginning of a new chapter.</p>
-        <span class="fc-tag ft-lime">25 Nov · 9am</span>
-        <a href="highlights.html#vidhi" class="feature-cta"><span>See details</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-      </div>
-      <div class="feature-card reveal d4">
-        <div class="feature-icon fi-pink">💍</div>
-        <h3>The Wedding</h3>
-        <p>Sanket and Sneha exchange vows in a ceremony filled with love, marigolds, and happy tears.</p>
-        <span class="fc-tag ft-pink">25 Nov · 12:15pm</span>
-        <a href="highlights.html#wedding" class="feature-cta"><span>See details</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-      </div>
-      <div class="feature-card reveal d5">
-        <div class="feature-icon fi-purple">🥂</div>
-        <h3>Wedding Reception</h3>
-        <p>Celebrate the newlyweds with a feast, toasts, photos, and dancing until sunset.</p>
-        <span class="fc-tag ft-purple">25 Nov · 2pm</span>
-        <a href="highlights.html#reception" class="feature-cta"><span>See details</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-      </div>
-      <div class="feature-card reveal d6">
-        <div class="feature-icon fi-teal">🌿</div>
-        <h3>Marigold Banquets</h3>
-        <p>A stunning venue in the heart of Pune, draped in marigolds for our most special day.</p>
-        <span class="fc-tag ft-lime">Pune, Maharashtra</span>
-        <a href="https://maps.app.goo.gl/HEEg9PPyY22yJDSi9" target="_blank" class="feature-cta"><span>View on maps</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a>
-      </div>
+      <div class="feature-card reveal d1"><div class="feature-icon fi-coral">🌸</div><h3>Haldi Ceremony</h3><p>A vibrant turmeric ritual to bless the couple. Wear something bright — expect to get colourful!</p><span class="fc-tag ft-coral">24 Nov · 4pm</span><a href="highlights.html#haldi" class="feature-cta"><span>See details</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+      <div class="feature-card reveal d2"><div class="feature-icon fi-yellow">🎶</div><h3>Sangeet Night</h3><p>An evening of music, dance, and celebration. Bring your best moves and most festive outfit!</p><span class="fc-tag ft-yellow">24 Nov · Evening</span><a href="highlights.html#sangeet" class="feature-cta"><span>See details</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+      <div class="feature-card reveal d3"><div class="feature-icon fi-lime">🙏</div><h3>Vidhi — Rituals</h3><p>Beautiful traditional pre-wedding rituals marking the sacred beginning of a new chapter.</p><span class="fc-tag ft-lime">25 Nov · 9am</span><a href="highlights.html#vidhi" class="feature-cta"><span>See details</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+      <div class="feature-card reveal d4"><div class="feature-icon fi-pink">💍</div><h3>The Wedding</h3><p>Sanket and Sneha exchange vows in a ceremony filled with love, marigolds, and happy tears.</p><span class="fc-tag ft-pink">25 Nov · 12:15pm</span><a href="highlights.html#wedding" class="feature-cta"><span>See details</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+      <div class="feature-card reveal d5"><div class="feature-icon fi-purple">🥂</div><h3>Wedding Reception</h3><p>Celebrate the newlyweds with a feast, toasts, photos, and dancing until sunset.</p><span class="fc-tag ft-purple">25 Nov · 2pm</span><a href="highlights.html#reception" class="feature-cta"><span>See details</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
+      <div class="feature-card reveal d6"><div class="feature-icon fi-teal">🌿</div><h3>Marigold Banquets</h3><p>A stunning venue in the heart of Pune, draped in marigolds for our most special day.</p><span class="fc-tag ft-lime">Pune, Maharashtra</span><a href="https://maps.app.goo.gl/HEEg9PPyY22yJDSi9" target="_blank" class="feature-cta"><span>View on maps</span><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 8h10M9 4l4 4-4 4"/></svg></a></div>
     </div>
   </div>
 </section>
@@ -351,18 +435,15 @@
 <section id="schedule">
   <div class="schedule-inner">
     <div class="schedule-header">
-      <div class="reveal">
-        <div class="section-label sl-coral">Schedule</div>
-        <h2 class="section-title">The <em>plan</em></h2>
-      </div>
+      <div class="reveal"><div class="section-label sl-coral">Schedule</div><h2 class="section-title">The <em>plan</em></h2></div>
       <a href="highlights.html#schedule" class="btn-outline-dark reveal">Full schedule →</a>
     </div>
     <div class="schedule-days">
       <div class="reveal-left">
         <div class="day-head dh1"><div class="dot"></div>Monday, 24 November 2026</div>
         <div class="tl">
-          <div class="tl-item"><div class="tl-dot dy"></div><div class="tl-time">Morning</div><div class="tl-card"><span class="tl-badge tb-y">Travel</span><h4>Head to Pune</h4><p>Make your way, check in, get ready to celebrate!</p></div></div>
-          <div class="tl-item"><div class="tl-dot dc"></div><div class="tl-time">4:00 PM</div><div class="tl-card"><span class="tl-badge tb-c">Haldi</span><h4>Haldi ceremony begins</h4><p>Wear old clothes — expect turmeric everywhere!</p></div></div>
+          <div class="tl-item"><div class="tl-dot dy"></div><div class="tl-time">Morning</div><div class="tl-card"><span class="tl-badge tb-y">Travel</span><h4>Head to Pune</h4><p>Make your way, check in, get ready!</p></div></div>
+          <div class="tl-item"><div class="tl-dot dc"></div><div class="tl-time">4:00 PM</div><div class="tl-card"><span class="tl-badge tb-c">Haldi</span><h4>Haldi ceremony begins</h4><p>Wear old clothes — expect turmeric!</p></div></div>
           <div class="tl-item"><div class="tl-dot dp"></div><div class="tl-time">Evening</div><div class="tl-card"><span class="tl-badge tb-p">Sangeet</span><h4>Sangeet night</h4><p>Music, dance, and joy — until midnight.</p></div></div>
         </div>
       </div>
@@ -370,8 +451,8 @@
         <div class="day-head dh2"><div class="dot"></div>Tuesday, 25 November 2026</div>
         <div class="tl">
           <div class="tl-item"><div class="tl-dot dl"></div><div class="tl-time">9:00 AM</div><div class="tl-card"><span class="tl-badge tb-l">Rituals</span><h4>Vidhi — sacred rituals</h4><p>Please arrive by 8:45 AM.</p></div></div>
-          <div class="tl-item"><div class="tl-dot dc"></div><div class="tl-time">12:15 PM</div><div class="tl-card"><span class="tl-badge tb-c">Wedding</span><h4>The wedding ceremony</h4><p>Sanket & Sneha exchange vows. Be seated by noon.</p></div></div>
-          <div class="tl-item"><div class="tl-dot dp"></div><div class="tl-time">2:00 PM</div><div class="tl-card"><span class="tl-badge tb-p">Reception</span><h4>Wedding reception</h4><p>Food, drinks, toasts, and dancing until 5 PM.</p></div></div>
+          <div class="tl-item"><div class="tl-dot dc"></div><div class="tl-time">12:15 PM</div><div class="tl-card"><span class="tl-badge tb-c">Wedding</span><h4>The wedding ceremony</h4><p>Be seated by noon.</p></div></div>
+          <div class="tl-item"><div class="tl-dot dp"></div><div class="tl-time">2:00 PM</div><div class="tl-card"><span class="tl-badge tb-p">Reception</span><h4>Wedding reception</h4><p>Food, drinks, toasts until 5 PM.</p></div></div>
         </div>
       </div>
     </div>
@@ -382,38 +463,17 @@
 <section id="travel">
   <div class="travel-inner">
     <div class="travel-header">
-      <div class="reveal">
-        <div class="section-label" style="color:rgba(255,255,255,.4)"><span style="width:20px;height:2px;background:rgba(255,255,255,.2);display:inline-block;border-radius:2px;margin-right:10px"></span>Travel guide</div>
-        <h2 class="section-title" style="color:#fff">Getting <em>here</em></h2>
-      </div>
+      <div class="reveal"><div class="section-label" style="color:rgba(255,255,255,.4)"><span style="width:20px;height:2px;background:rgba(255,255,255,.2);display:inline-block;border-radius:2px;margin-right:10px"></span>Travel guide</div><h2 class="section-title" style="color:#fff">Getting <em>here</em></h2></div>
       <a href="travel.html" class="btn-outline-white reveal">Full travel guide →</a>
     </div>
     <div class="travel-cols">
       <div class="travel-col-card reveal-left" style="background:rgba(139,127,232,.08)">
-        <div class="tc-top">
-          <div class="tc-flag">🇳🇱</div>
-          <div class="tc-origin ams">Friends from Amsterdam</div>
-          <div class="tc-title">AMS → Pune</div>
-          <div class="tc-desc">Fly via Dubai, Doha, or Abu Dhabi. Pune Airport (PNQ) is your closest landing. Check KLM, Emirates, and IndiGo connections.</div>
-        </div>
-        <div class="tc-bottom">
-          <div class="tc-stat"><div class="val">~11h</div><div class="lbl">Flight time</div></div>
-          <div class="tc-stat"><div class="val">1 stop</div><div class="lbl">Typical</div></div>
-          <a href="travel.html#ams" class="tc-link ams">View details →</a>
-        </div>
+        <div class="tc-top"><div class="tc-flag">🇳🇱</div><div class="tc-origin ams">Friends from Amsterdam</div><div class="tc-title">AMS → Pune</div><div class="tc-desc">Via Dubai, Doha, or Abu Dhabi. Pune Airport (PNQ) is your closest landing.</div></div>
+        <div class="tc-bottom"><div class="tc-stat"><div class="val">~11h</div><div class="lbl">Flight</div></div><div class="tc-stat"><div class="val">1 stop</div><div class="lbl">Typical</div></div><a href="travel.html#ams" class="tc-link ams">Details →</a></div>
       </div>
       <div class="travel-col-card reveal-right" style="background:rgba(232,86,58,.07)">
-        <div class="tc-top">
-          <div class="tc-flag">🇮🇹</div>
-          <div class="tc-origin italy">Friends from Italy</div>
-          <div class="tc-title">MXP / FCO → Pune</div>
-          <div class="tc-desc">Connections via Emirates (Dubai), Qatar Airways (Doha), or Etihad (Abu Dhabi). Usually one stop, ~10–13 hours total.</div>
-        </div>
-        <div class="tc-bottom">
-          <div class="tc-stat"><div class="val">~12h</div><div class="lbl">Flight time</div></div>
-          <div class="tc-stat"><div class="val">1 stop</div><div class="lbl">Typical</div></div>
-          <a href="travel.html#italy" class="tc-link italy">View details →</a>
-        </div>
+        <div class="tc-top"><div class="tc-flag">🇮🇹</div><div class="tc-origin italy">Friends from Italy</div><div class="tc-title">MXP / FCO → Pune</div><div class="tc-desc">Via Emirates (Dubai), Qatar Airways (Doha), or Etihad (Abu Dhabi).</div></div>
+        <div class="tc-bottom"><div class="tc-stat"><div class="val">~12h</div><div class="lbl">Flight</div></div><div class="tc-stat"><div class="val">1 stop</div><div class="lbl">Typical</div></div><a href="travel.html#italy" class="tc-link italy">Details →</a></div>
       </div>
     </div>
   </div>
@@ -423,10 +483,7 @@
 <section id="attire">
   <div class="attire-inner">
     <div class="attire-header">
-      <div class="reveal">
-        <div class="section-label sl-pink">Dress code</div>
-        <h2 class="section-title">What to <em>wear</em></h2>
-      </div>
+      <div class="reveal"><div class="section-label sl-pink">Dress code</div><h2 class="section-title">What to <em>wear</em></h2></div>
       <div class="palette-row reveal">
         <div class="sw" style="background:#E05C8A"></div><div class="sw" style="background:#E8563A"></div>
         <div class="sw" style="background:#F5A623"></div><div class="sw" style="background:#8B7FE8"></div>
@@ -434,30 +491,11 @@
       </div>
     </div>
     <div class="attire-grid">
-      <div class="acard reveal-left">
-        <h3>Day 1 — Haldi & Sangeet</h3>
-        <p><strong>Haldi:</strong> Cotton kurtas in yellow, orange, or white — expect turmeric!<br><br><strong>Sangeet:</strong> Lehenga, saree, or anarkali. Men: kurta-pyjama or sherwani.</p>
-        <div class="achips">
-          <span class="achip" style="border-color:var(--coral);color:var(--coral)">Lehenga</span>
-          <span class="achip" style="border-color:var(--yellow-d);color:var(--yellow-d)">Kurta</span>
-          <span class="achip" style="border-color:var(--pink-d);color:var(--pink-d)">Saree</span>
-        </div>
-      </div>
-      <div class="acard reveal-right">
-        <h3>Day 2 — Wedding & Reception</h3>
-        <p>Formal Indian or Western. Saree, lehenga, or salwar suit for women. Sherwani, suit, or formal kurta for men.</p>
-        <div class="achips">
-          <span class="achip" style="border-color:var(--lime-d);color:var(--lime-d)">Saree</span>
-          <span class="achip" style="border-color:var(--coral);color:var(--coral)">Sherwani</span>
-          <span class="achip" style="border-color:var(--purple-d);color:var(--purple-d)">Western formal</span>
-        </div>
-      </div>
+      <div class="acard reveal-left"><h3>Day 1 — Haldi & Sangeet</h3><p><strong>Haldi:</strong> Cotton kurtas in yellow, orange, or white — expect turmeric!<br><br><strong>Sangeet:</strong> Lehenga, saree, or anarkali. Men: kurta-pyjama or sherwani.</p><div class="achips"><span class="achip" style="border-color:var(--coral);color:var(--coral)">Lehenga</span><span class="achip" style="border-color:var(--yellow-d);color:var(--yellow-d)">Kurta</span><span class="achip" style="border-color:var(--pink-d);color:var(--pink-d)">Saree</span></div></div>
+      <div class="acard reveal-right"><h3>Day 2 — Wedding & Reception</h3><p>Formal Indian or Western. Saree, lehenga, or salwar suit for women. Sherwani, suit, or formal kurta for men.</p><div class="achips"><span class="achip" style="border-color:var(--lime-d);color:var(--lime-d)">Saree</span><span class="achip" style="border-color:var(--coral);color:var(--coral)">Sherwani</span><span class="achip" style="border-color:var(--purple-d);color:var(--purple-d)">Western formal</span></div></div>
     </div>
     <div class="attire-cta-banner reveal">
-      <div class="acb-text">
-        <h3>Full attire guide & colour palette</h3>
-        <p>Detailed do's & don'ts, colour swatches, and outfit inspiration for both days.</p>
-      </div>
+      <div class="acb-text"><h3>Full attire guide & colour palette</h3><p>Detailed do's & don'ts, outfit inspiration, and colour swatches for both days.</p></div>
       <a href="attire.html" class="btn-primary">View full guide →</a>
     </div>
   </div>
@@ -489,27 +527,178 @@
   <div class="footer-logo">Sanket & Sneha</div>
   <div class="footer-meta">24–25 November 2026 · Marigold Banquets, Pune</div>
   <div class="footer-links">
-    <a href="story.html">Our Story</a><a href="people.html">Our People</a><a href="highlights.html">Highlights</a>
-    <a href="travel.html">Travel</a><a href="attire.html">Attire</a><a href="#rsvp">RSVP</a>
+    <a href="story.html">Our Story</a><a href="people.html">Our People</a>
+    <a href="highlights.html">Highlights</a><a href="travel.html">Travel</a>
+    <a href="attire.html">Attire</a><a href="#rsvp">RSVP</a>
   </div>
 </footer>
 
+</div><!-- /post-hero -->
+
 <script src="shared.js"></script>
 <script>
-// Hero canvas particles
+// ══════════════════════════════════════════
+// SCROLL-EXPAND HERO
+// ══════════════════════════════════════════
+let progress = 0;
+let expanded = false;
+let locked = true;
+let touchStartY = 0;
+const isMobile = () => window.innerWidth < 768;
+
+const heroEl       = document.getElementById('hero');
+const heroBg       = document.getElementById('hero-bg');
+const heroBgOvl    = document.getElementById('hero-bg-overlay');
+const heroFrame    = document.getElementById('hero-frame');
+const heroFrameOvl = document.getElementById('hero-frame-overlay');
+const nameSanket   = document.getElementById('name-sanket');
+const nameSneha    = document.getElementById('name-sneha');
+const scrollHint   = document.getElementById('scroll-hint');
+const heroMeta     = document.getElementById('hero-meta');
+const heroCtas     = document.getElementById('hero-ctas');
+const heroCountdown= document.getElementById('hcdown');
+const postHero     = document.getElementById('post-hero');
+
+function applyProgress(p) {
+  const mob = isMobile();
+  const maxW = mob ? 750 : 1550;
+  const maxH = mob ? 550 : 900;
+  const initW = 300, initH = mob ? 420 : 460;
+
+  const w = initW + p * (maxW - initW);
+  const h = initH + p * (maxH - initH);
+
+  heroFrame.style.width  = Math.min(w, window.innerWidth * .98) + 'px';
+  heroFrame.style.height = Math.min(h, window.innerHeight * .95) + 'px';
+  heroFrame.style.borderRadius = (20 - p * 20) + 'px';
+
+  // bg fades
+  heroBg.style.opacity    = (1 - p * 1.2);
+  heroBgOvl.style.opacity = (1 - p * 1.2);
+
+  // frame overlay fades
+  heroFrameOvl.style.opacity = Math.max(0, 0.35 - p * 0.35);
+
+  // names split
+  const splitVw = mob ? p * 28 : p * 22;
+  nameSanket.style.transform = `translateX(-${splitVw}vw)`;
+  nameSneha.style.transform  = `translateX(${splitVw}vw)`;
+
+  // scroll hint fades
+  scrollHint.style.opacity = p < 0.1 ? 1 : Math.max(0, 1 - p * 4);
+
+  // meta + ctas appear after 75%
+  if (p >= 0.75) {
+    heroMeta.classList.add('visible');
+    heroCtas.classList.add('visible');
+    heroCountdown.classList.add('visible');
+  } else {
+    heroMeta.classList.remove('visible');
+    heroCtas.classList.remove('visible');
+    heroCountdown.classList.remove('visible');
+  }
+}
+
+function onExpanded() {
+  expanded = true;
+  locked = false;
+  postHero.classList.add('visible');
+  document.body.style.overflow = '';
+}
+
+function onCollapsed() {
+  expanded = false;
+  locked = true;
+  document.body.style.overflow = 'hidden';
+}
+
+// Lock body scroll initially
+document.body.style.overflow = 'hidden';
+applyProgress(0);
+
+// WHEEL
+window.addEventListener('wheel', (e) => {
+  if (expanded && e.deltaY < 0 && window.scrollY <= 5) {
+    // scrolling back up to re-collapse
+    progress = 0.99;
+    expanded = false;
+    locked = true;
+    document.body.style.overflow = 'hidden';
+    e.preventDefault();
+    animateProgress(0);
+    return;
+  }
+  if (!locked) return;
+  e.preventDefault();
+  const delta = e.deltaY * 0.001;
+  progress = Math.min(1, Math.max(0, progress + delta));
+  applyProgress(progress);
+  if (progress >= 1) onExpanded();
+}, { passive: false });
+
+// TOUCH
+window.addEventListener('touchstart', (e) => { touchStartY = e.touches[0].clientY; }, { passive: false });
+window.addEventListener('touchmove', (e) => {
+  if (!locked) return;
+  e.preventDefault();
+  const dy = touchStartY - e.touches[0].clientY;
+  const delta = dy * 0.006;
+  progress = Math.min(1, Math.max(0, progress + delta));
+  touchStartY = e.touches[0].clientY;
+  applyProgress(progress);
+  if (progress >= 1) onExpanded();
+}, { passive: false });
+
+// Animate collapse back
+function animateProgress(target) {
+  const step = () => {
+    if (Math.abs(progress - target) < 0.01) { progress = target; applyProgress(0); return; }
+    progress += (target - progress) * 0.1;
+    applyProgress(progress);
+    requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+// Nav scroll effect
+window.addEventListener('scroll', () => {
+  document.getElementById('main-nav').classList.toggle('scrolled', scrollY > 60);
+  if (!locked) return;
+  window.scrollTo(0, 0);
+});
+
+// COUNTDOWN
+function tick(){
+  const t=new Date('2026-11-24T16:00:00+05:30'),now=new Date(),diff=t-now;
+  if(diff<=0){document.getElementById('hcdown').style.display='none';return;}
+  document.getElementById('hc-d').textContent=Math.floor(diff/86400000);
+  document.getElementById('hc-h').textContent=String(Math.floor(diff%86400000/3600000)).padStart(2,'0');
+  document.getElementById('hc-m').textContent=String(Math.floor(diff%3600000/60000)).padStart(2,'0');
+  document.getElementById('hc-s').textContent=String(Math.floor(diff%60000/1000)).padStart(2,'0');
+}
+tick();setInterval(tick,1000);
+
+// PARTICLES
 const canvas=document.getElementById('heroCanvas');
 const ctx=canvas.getContext('2d');
-let W,H,particles=[];
-function resize(){W=canvas.width=canvas.offsetWidth;H=canvas.height=canvas.offsetHeight;}
+let W,H,pts=[];
+function resize(){W=canvas.width=window.innerWidth;H=canvas.height=window.innerHeight;}
 resize();window.addEventListener('resize',resize);
-const colors=['#E8563A','#F5A623','#6BBF3A','#E05C8A','#8B7FE8','#2DB9B9'];
-class P{constructor(){this.reset(true);}reset(i){this.x=Math.random()*W;this.y=i?Math.random()*H:H+10;this.r=Math.random()*2+.5;this.color=colors[Math.floor(Math.random()*colors.length)];this.vx=(Math.random()-.5)*.4;this.vy=-(Math.random()*.8+.2);this.alpha=Math.random()*.5+.15;this.life=0;this.maxLife=Math.random()*300+200;}update(){this.x+=this.vx;this.y+=this.vy;this.life++;if(this.y<-10||this.life>this.maxLife)this.reset(false);}draw(){ctx.save();ctx.globalAlpha=this.alpha*(1-this.life/this.maxLife);ctx.fillStyle=this.color;ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fill();ctx.restore();}}
-for(let i=0;i<100;i++)particles.push(new P());
-let hx=0,hy=0;
-document.getElementById('hero').addEventListener('mousemove',e=>{const r=e.currentTarget.getBoundingClientRect();hx=(e.clientX-r.left-r.width/2)/r.width;hy=(e.clientY-r.top-r.height/2)/r.height;});
-function anim(){ctx.clearRect(0,0,W,H);particles.forEach(p=>{p.update();p.draw();});const ox=W*.5+hx*50,oy=H*.5+hy*30;const g=ctx.createRadialGradient(ox,oy,0,ox,oy,200);g.addColorStop(0,'rgba(245,166,35,.06)');g.addColorStop(1,'transparent');ctx.fillStyle=g;ctx.beginPath();ctx.arc(ox,oy,200,0,Math.PI*2);ctx.fill();requestAnimationFrame(anim);}
+const cols=['#E8563A','#F5A623','#6BBF3A','#E05C8A','#8B7FE8'];
+class P{constructor(){this.reset(true);}reset(i){this.x=Math.random()*W;this.y=i?Math.random()*H:H+10;this.r=Math.random()*2+.5;this.c=cols[Math.floor(Math.random()*cols.length)];this.vx=(Math.random()-.5)*.4;this.vy=-(Math.random()*.8+.2);this.a=Math.random()*.5+.15;this.life=0;this.max=Math.random()*280+180;}up(){this.x+=this.vx;this.y+=this.vy;this.life++;if(this.y<-10||this.life>this.max)this.reset();}dr(){ctx.save();ctx.globalAlpha=this.a*(1-this.life/this.max);ctx.fillStyle=this.c;ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);ctx.fill();ctx.restore();}}
+for(let i=0;i<100;i++)pts.push(new P());
+function anim(){ctx.clearRect(0,0,W,H);pts.forEach(p=>{p.up();p.dr();});requestAnimationFrame(anim);}
 anim();
-// About frame tilt
+
+// RSVP
+let _att=null;
+function setAtt(v){_att=v;document.getElementById('yes-btn').className='att-btn'+(v==='yes'?' yes':'');document.getElementById('no-btn').className='att-btn'+(v==='no'?' no':'');}
+function submitRSVP(){const fn=document.getElementById('fn').value.trim();const em=document.getElementById('em').value.trim();if(!fn||!em){alert('Please enter your name and email.');return;}fireConfetti();document.getElementById('rsvp-form').style.display='none';document.getElementById('rsvp-ok').style.display='block';}
+
+// FEATURE CARD GLOW
+document.querySelectorAll('.feature-card').forEach(c=>{c.addEventListener('mousemove',e=>{const r=c.getBoundingClientRect();c.style.setProperty('--mx',((e.clientX-r.left)/r.width*100)+'%');c.style.setProperty('--my',((e.clientY-r.top)/r.height*100)+'%');});});
+
+// ABOUT FRAME TILT
 const frame=document.querySelector('.about-frame');
 if(frame){frame.addEventListener('mousemove',e=>{const r=frame.getBoundingClientRect();const x=(e.clientX-r.left)/r.width-.5;const y=(e.clientY-r.top)/r.height-.5;frame.style.transform=`perspective(700px) rotateY(${x*10}deg) rotateX(${-y*10}deg) scale(1.02)`;});frame.addEventListener('mouseleave',()=>{frame.style.transform='';});}
 </script>

@@ -3,119 +3,164 @@
 <head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Our People — Sanket & Sneha</title>
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="shared.css">
 <style>
-.page-body{background:#fff;}
+.page-body{background:var(--cream);}
 .page-inner{max-width:1080px;margin:0 auto;padding:0 48px 96px;}
 
-/* GROUP SECTION */
-.group-section{padding-top:80px;border-top:1px solid rgba(0,0,0,.07);margin-top:0;}
-.group-section:first-of-type{border-top:none;padding-top:72px;}
+/* GROUP SECTIONS */
+.group-section{padding-top:80px;}
 .group-anchor{display:block;position:relative;top:calc(-1 * var(--nav-h) - 20px);}
 
-.group-header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:48px;}
-.gh-left{}
+.group-header{margin-bottom:36px;}
 .gh-badge{
   display:inline-flex;align-items:center;gap:8px;
   font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
   padding:5px 14px;border-radius:20px;margin-bottom:12px;
 }
-.badge-sanket-friends{background:var(--coral-l);color:var(--coral);}
-.badge-sneha-friends{background:var(--pink-l);color:var(--pink-d);}
-.badge-sanket-fam{background:var(--yellow-l);color:var(--yellow-d);}
-.badge-sneha-fam{background:var(--purple-l);color:var(--purple-d);}
-.badge-lime{background:var(--lime-l);color:var(--lime-d);}
-
-.group-title{font-family:'Cormorant',serif;font-size:clamp(34px,4.5vw,58px);font-weight:300;line-height:1.1;}
+.badge-s-friends{background:var(--coral-l);color:var(--coral);}
+.badge-sn-friends{background:var(--pink-l);color:var(--pink-d);}
+.badge-s-fam{background:var(--yellow-l);color:var(--yellow-d);}
+.badge-sn-fam{background:var(--purple-l);color:var(--purple-d);}
+.group-title{font-family:'Cormorant',serif;font-size:clamp(30px,4vw,52px);font-weight:300;line-height:1.1;margin-bottom:8px;}
 .group-title em{font-style:italic;}
-.group-desc{font-size:15px;color:var(--mid);margin-top:10px;line-height:1.75;max-width:520px;}
-.group-count{
-  font-family:'Cormorant',serif;font-size:56px;font-weight:300;
-  color:rgba(0,0,0,.06);line-height:1;text-align:right;flex-shrink:0;
-}
+.group-desc{font-size:15px;color:var(--mid);line-height:1.75;max-width:560px;}
 
-/* PEOPLE GRID */
-.people-grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
-  gap:20px;
+/* PERSON SQUADS — horizontal tabs */
+.squad-tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px;}
+.squad-tab{
+  padding:8px 18px;border-radius:30px;font-size:12px;font-weight:600;
+  letter-spacing:.06em;border:1.5px solid;cursor:none;transition:all .2s;
+  background:transparent;font-family:'Outfit',sans-serif;
 }
-.person-card{
+.squad-tab:hover{transform:translateY(-2px);}
+.squad-tab.active-coral{background:var(--coral);color:#fff;border-color:var(--coral);}
+.squad-tab.active-pink{background:var(--pink);color:#fff;border-color:var(--pink);}
+.squad-tab.active-yellow{background:var(--yellow);color:#fff;border-color:var(--yellow);}
+.squad-tab.active-purple{background:var(--purple);color:#fff;border-color:var(--purple);}
+.squad-tab.inactive{border-color:rgba(0,0,0,.12);color:var(--mid);}
+
+/* CAROUSEL */
+.carousel-wrap{position:relative;overflow:hidden;}
+.carousel-track-outer{overflow:hidden;border-radius:var(--radius);}
+.carousel-track{
+  display:flex;gap:20px;
+  transition:transform .5s cubic-bezier(.16,1,.3,1);
+}
+.carousel-slide{
+  flex-shrink:0;
+  width:calc(33.33% - 14px);
   border-radius:var(--radius);overflow:hidden;
   border:1.5px solid rgba(0,0,0,.07);
   background:#fff;
   transition:all .3s cubic-bezier(.16,1,.3,1);
   cursor:none;
 }
-.person-card:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(0,0,0,.1);border-color:transparent;}
-.pc-photo{
-  aspect-ratio:1/1;overflow:hidden;position:relative;
-  background:var(--cream);
+.carousel-slide:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.1);border-color:transparent;}
+.cs-photo{
+  aspect-ratio:4/3;overflow:hidden;position:relative;background:var(--cream);
   display:flex;align-items:center;justify-content:center;
 }
-.pc-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .5s cubic-bezier(.16,1,.3,1);}
-.person-card:hover .pc-photo img{transform:scale(1.06);}
-.pc-initials{
-  font-family:'Cormorant',serif;font-size:40px;font-weight:300;font-style:italic;
-  color:rgba(0,0,0,.15);user-select:none;
+.cs-photo img{width:100%;height:100%;object-fit:cover;object-position:center;transition:transform .5s cubic-bezier(.16,1,.3,1);}
+.carousel-slide:hover .cs-photo img{transform:scale(1.05);}
+.cs-placeholder{
+  width:100%;height:100%;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:10px;padding:24px;
 }
-.pc-flag{
-  position:absolute;top:10px;right:10px;
-  width:28px;height:28px;border-radius:50%;
-  background:rgba(253,248,242,.92);backdrop-filter:blur(6px);
-  display:flex;align-items:center;justify-content:center;font-size:14px;
-}
-.pc-body{padding:14px 16px;}
-.pc-name{font-size:15px;font-weight:600;color:var(--dark);margin-bottom:2px;}
-.pc-role{font-size:11px;letter-spacing:.06em;color:var(--mid);}
-.pc-location{display:flex;align-items:center;gap:4px;margin-top:6px;font-size:12px;color:var(--mid);}
-.pc-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;}
-.pc-tag{font-size:10px;font-weight:500;padding:2px 8px;border-radius:10px;border:1px solid;}
+.cs-placeholder .emoji{font-size:36px;opacity:.4;}
+.cs-placeholder p{font-size:13px;color:var(--mid);text-align:center;font-weight:500;}
+.cs-body{padding:16px 18px;}
+.cs-group-name{font-family:'Cormorant',serif;font-size:20px;font-weight:400;margin-bottom:4px;}
+.cs-members{font-size:12px;color:var(--mid);line-height:1.6;}
+.cs-flags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;}
+.cs-flag{font-size:18px;}
+.cs-tag{font-size:10px;font-weight:600;padding:3px 10px;border-radius:10px;border:1px solid;margin-top:8px;display:inline-block;}
 
-/* ADD PERSON CARD */
-.add-person-card{
+/* CAROUSEL CONTROLS */
+.carousel-controls{display:flex;align-items:center;gap:12px;margin-top:18px;}
+.cc-btn{
+  width:40px;height:40px;border-radius:50%;border:1.5px solid rgba(0,0,0,.1);
+  background:#fff;cursor:none;transition:all .2s;
+  display:flex;align-items:center;justify-content:center;font-size:16px;
+}
+.cc-btn:hover{border-color:var(--coral);background:var(--coral-l);}
+.cc-btn:disabled{opacity:.3;cursor:default;}
+.cc-dots{display:flex;gap:6px;align-items:center;}
+.cc-dot{
+  width:6px;height:6px;border-radius:50%;background:rgba(0,0,0,.15);
+  transition:all .25s;cursor:none;border:none;padding:0;
+}
+.cc-dot.active{width:20px;border-radius:3px;}
+
+/* ADD PLACEHOLDER */
+.add-slide{
+  flex-shrink:0;width:calc(33.33% - 14px);
   border-radius:var(--radius);border:1.5px dashed rgba(0,0,0,.12);
   background:rgba(0,0,0,.015);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
-  gap:8px;padding:32px 16px;cursor:none;
-  transition:all .2s;aspect-ratio:auto;min-height:180px;
+  gap:8px;padding:32px;min-height:200px;cursor:none;transition:all .2s;
 }
-.add-person-card:hover{background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.2);}
-.add-icon{font-size:28px;opacity:.3;}
-.add-label{font-size:13px;color:var(--mid);text-align:center;}
+.add-slide:hover{background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.2);}
+.add-slide .add-icon{font-size:28px;opacity:.3;}
+.add-slide .add-label{font-size:13px;color:var(--mid);text-align:center;}
 
-/* QUOTE STRIP between groups */
+/* PERSON CARDS for individuals within a group */
+.people-mini-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));
+  gap:14px;margin-top:20px;
+}
+.mini-card{
+  border-radius:var(--radius-sm);overflow:hidden;border:1.5px solid rgba(0,0,0,.07);
+  background:#fff;transition:all .3s cubic-bezier(.16,1,.3,1);cursor:none;
+}
+.mini-card:hover{transform:translateY(-3px);box-shadow:0 10px 28px rgba(0,0,0,.09);border-color:transparent;}
+.mc-photo{
+  aspect-ratio:1;overflow:hidden;background:var(--cream);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.mc-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;}
+.mc-initials{font-family:'Cormorant',serif;font-size:32px;font-weight:300;font-style:italic;color:rgba(0,0,0,.15);}
+.mc-flag{position:absolute;top:6px;right:6px;font-size:14px;width:24px;height:24px;border-radius:50%;background:rgba(253,248,242,.9);display:flex;align-items:center;justify-content:center;}
+.mc-body{padding:10px 12px;}
+.mc-name{font-size:13px;font-weight:600;margin-bottom:2px;}
+.mc-role{font-size:11px;color:var(--mid);}
+
+/* DIVIDER */
+.section-divider{height:1px;background:linear-gradient(to right,transparent,rgba(0,0,0,.08),transparent);margin:64px 0 0;}
+
+/* QUOTE STRIPS */
 .quote-strip{
   margin:64px 0;padding:32px 40px;border-radius:var(--radius);
-  background:linear-gradient(135deg,#1a0c04,#2D1B0E);
   display:flex;align-items:center;gap:24px;flex-wrap:wrap;
 }
-.qs-text{
-  font-family:'Cormorant',serif;font-size:22px;font-weight:300;font-style:italic;
-  color:rgba(255,255,255,.8);line-height:1.5;flex:1;
-}
+.qs-text{font-family:'Cormorant',serif;font-size:22px;font-weight:300;font-style:italic;line-height:1.5;flex:1;}
 .qs-text em{color:var(--yellow);}
 
-/* HERO NOTE */
-.hero-note{
-  padding:40px;border-radius:var(--radius);
-  background:linear-gradient(135deg,var(--coral-l),var(--pink-l));
-  border:1.5px solid rgba(232,86,58,.12);
-  display:flex;align-items:center;gap:28px;flex-wrap:wrap;
-  margin-bottom:0;
-}
-.hn-icon{font-size:48px;flex-shrink:0;}
-.hn-title{font-family:'Cormorant',serif;font-size:28px;font-weight:400;margin-bottom:6px;}
-.hn-desc{font-size:15px;color:var(--mid);line-height:1.7;}
+/* INDIVIDUAL PORTRAITS */
+.portrait-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;margin-top:48px;}
+.portrait-card{border-radius:var(--radius);overflow:hidden;position:relative;background:#fff;border:1.5px solid rgba(0,0,0,.07);transition:all .35s cubic-bezier(.16,1,.3,1);}
+.portrait-card:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(0,0,0,.1);border-color:transparent;}
+.portrait-photo{aspect-ratio:3/4;overflow:hidden;position:relative;}
+.portrait-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .5s cubic-bezier(.16,1,.3,1);}
+.portrait-card:hover .portrait-photo img{transform:scale(1.04);}
+.portrait-overlay{position:absolute;bottom:0;left:0;right:0;padding:28px;background:linear-gradient(to top,rgba(26,12,4,.9) 0%,transparent 100%);}
+.portrait-overlay h3{font-family:'Cormorant',serif;font-size:28px;font-weight:300;color:#fff;margin-bottom:4px;}
+.portrait-overlay .role{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.6);}
+.portrait-body{padding:20px 24px;}
+.portrait-body p{font-size:14px;color:var(--mid);line-height:1.75;margin-bottom:14px;}
+.portrait-chips{display:flex;gap:7px;flex-wrap:wrap;}
+.p-chip{font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px;border:1.5px solid;transition:all .2s;}
+.p-chip:hover{transform:translateY(-2px);}
 
 @media(max-width:900px){
   .page-inner{padding:0 20px 72px;}
-  .people-grid{grid-template-columns:repeat(2,1fr);}
-  .group-header{flex-direction:column;}
-  .group-count{display:none;}
+  .carousel-slide,.add-slide{width:calc(80% - 10px);}
+  .portrait-grid{grid-template-columns:1fr;}
+  .people-mini-grid{grid-template-columns:repeat(3,1fr);}
   .quote-strip{flex-direction:column;}
-  .hero-note{flex-direction:column;}
 }
 </style>
 </head>
@@ -152,10 +197,10 @@
     <div class="sub-breadcrumb"><a href="index.html">Home</a><span>/</span><span>Our People</span></div>
     <div class="sub-eyebrow">The ones who matter most</div>
     <h1 class="sub-title">Our <em>People</em></h1>
-    <p class="sub-desc">Every wedding is really a gathering of the people who shaped the couple. Meet the friends and family who make Sanket & Sneha who they are.</p>
+    <p class="sub-desc">Every great love story is really the story of many — the friends and families who shaped Sanket & Sneha into who they are.</p>
     <div class="sub-hero-ctas">
-      <a href="#sanket-friends" class="btn-primary">Sanket's squad</a>
-      <a href="#sneha-friends" class="btn-outline-white">Sneha's squad</a>
+      <a href="#sanket-section" class="btn-primary">Sanket's world</a>
+      <a href="#sneha-section" class="btn-outline-white">Sneha's world</a>
     </div>
   </div>
 </div>
@@ -163,302 +208,363 @@
 <div class="page-body">
 <div class="page-inner">
 
-  <!-- INTRO NOTE -->
-  <div class="hero-note reveal" style="margin-top:72px;">
-    <div class="hn-icon">🫂</div>
-    <div>
-      <div class="hn-title">A wedding is a village</div>
-      <div class="hn-desc">This page is a love letter to the people flying in from Amsterdam, Italy, and across India to celebrate with us. Add photos, locations, and fun facts about everyone here — it's a great way for the two groups to get to know each other before the wedding!</div>
+  <!-- ══════════════════════════════════════
+       SANKET'S PORTRAIT + GROUPS
+  ═══════════════════════════════════════ -->
+  <div id="sanket-section" class="group-anchor"></div>
+  <div style="padding-top:72px;">
+
+    <!-- Portrait intro -->
+    <div class="reveal" style="display:grid;grid-template-columns:1fr 2fr;gap:48px;align-items:center;margin-bottom:72px;">
+      <div style="border-radius:24px;overflow:hidden;aspect-ratio:3/4;background:#111;position:relative;">
+        <img src="photo-sanket2.jpg" alt="Sanket" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;background:linear-gradient(to top,rgba(26,12,4,.9),transparent);">
+          <div style="font-family:'Cormorant',serif;font-size:26px;font-weight:300;color:#fff;">Sanket</div>
+          <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:3px;">The Groom</div>
+        </div>
+      </div>
+      <div>
+        <div class="section-label sl-coral">About Sanket</div>
+        <h2 class="section-title" style="margin-bottom:20px;">His <em>story</em></h2>
+        <p style="font-size:16px;color:var(--mid);line-height:1.85;margin-bottom:16px;">Add Sanket's story here — where he grew up, what drives him, the adventures that shaped him. Tell your guests who he is beyond just the groom.</p>
+        <p style="font-size:16px;color:var(--mid);line-height:1.85;">From Amsterdam to Pune, from TPC to RAIT — his people come from everywhere, and every single one of them is worth knowing.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;">
+          <span class="chip coral">Add a passion</span>
+          <span class="chip yellow">Add another</span>
+          <span class="chip lime">And one more</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- SANKET'S FRIENDS CAROUSEL -->
+    <div id="sanket-friends" class="group-anchor"></div>
+    <div class="group-section">
+      <div class="group-header reveal">
+        <span class="gh-badge badge-s-friends">🧡 Sanket's Friends</span>
+        <h2 class="group-title">The <em>Squad</em></h2>
+        <p class="group-desc">Four groups of absolute legends — flying in from Amsterdam, bonded through TPC, RAIT days, and the family who feel like friends.</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="squad-tabs reveal" id="sanket-tabs">
+        <button class="squad-tab active-coral" onclick="showGroup('s','ams',this)" data-color="coral">🇳🇱 AMS Friends</button>
+        <button class="squad-tab inactive" onclick="showGroup('s','tpc',this)" data-color="coral">TPC Friends</button>
+        <button class="squad-tab inactive" onclick="showGroup('s','rait',this)" data-color="coral">RAIT Friends</button>
+        <button class="squad-tab inactive" onclick="showGroup('s','cousins',this)" data-color="coral">Cousins 👨‍👩‍👦</button>
+      </div>
+
+      <!-- AMS FRIENDS -->
+      <div class="group-panel" id="s-ams">
+        <div class="carousel-wrap">
+          <div class="carousel-track-outer">
+            <div class="carousel-track" id="track-s-ams">
+              <div class="carousel-slide">
+                <div class="cs-photo" style="background:linear-gradient(135deg,var(--purple-l),#e8e4fc)">
+                  <div class="cs-placeholder"><div class="emoji">🇳🇱</div><p>Add group photo here</p></div>
+                </div>
+                <div class="cs-body">
+                  <div class="cs-group-name">AMS Friends</div>
+                  <div class="cs-members">Add names of the Amsterdam crew — the ones making the big trip to Pune!</div>
+                  <div class="cs-flags"><span class="cs-flag">🇳🇱</span><span class="cs-flag">🇮🇳</span></div>
+                  <span class="cs-tag" style="border-color:var(--purple-d);color:var(--purple-d)">Flying from Amsterdam</span>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="cs-photo" style="background:linear-gradient(135deg,#e8e4fc,var(--coral-l))">
+                  <div class="cs-placeholder"><div class="emoji">✈️</div><p>Add another AMS memory</p></div>
+                </div>
+                <div class="cs-body">
+                  <div class="cs-group-name">Amsterdam nights</div>
+                  <div class="cs-members">Add a fun memory or caption about the Amsterdam crew here.</div>
+                  <span class="cs-tag" style="border-color:var(--coral);color:var(--coral)">~11h flight for this</span>
+                </div>
+              </div>
+              <div class="add-slide">
+                <div class="add-icon">➕</div>
+                <div class="add-label">Add more AMS<br>friend photos</div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-controls">
+            <button class="cc-btn" onclick="scrollCarousel('s-ams',-1)">←</button>
+            <div class="cc-dots" id="dots-s-ams"></div>
+            <button class="cc-btn" onclick="scrollCarousel('s-ams',1)">→</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- TPC FRIENDS -->
+      <div class="group-panel" id="s-tpc" style="display:none">
+        <div class="carousel-wrap">
+          <div class="carousel-track-outer">
+            <div class="carousel-track" id="track-s-tpc">
+              <div class="carousel-slide">
+                <div class="cs-photo" style="background:linear-gradient(135deg,var(--coral-l),var(--yellow-l))">
+                  <div class="cs-placeholder"><div class="emoji">🏢</div><p>Add TPC group photo</p></div>
+                </div>
+                <div class="cs-body">
+                  <div class="cs-group-name">TPC Friends</div>
+                  <div class="cs-members">Add the TPC crew names here — the work family who became real family.</div>
+                  <span class="cs-tag" style="border-color:var(--coral);color:var(--coral)">TPC crew</span>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="cs-photo" style="background:linear-gradient(135deg,var(--yellow-l),var(--lime-l))">
+                  <div class="cs-placeholder"><div class="emoji">🎉</div><p>Add another memory</p></div>
+                </div>
+                <div class="cs-body">
+                  <div class="cs-group-name">TPC days</div>
+                  <div class="cs-members">Add a caption or memory from TPC times here.</div>
+                  <span class="cs-tag" style="border-color:var(--yellow-d);color:var(--yellow-d)">The OG team</span>
+                </div>
+              </div>
+              <div class="add-slide">
+                <div class="add-icon">➕</div>
+                <div class="add-label">Add more TPC<br>memories</div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-controls">
+            <button class="cc-btn" onclick="scrollCarousel('s-tpc',-1)">←</button>
+            <div class="cc-dots" id="dots-s-tpc"></div>
+            <button class="cc-btn" onclick="scrollCarousel('s-tpc',1)">→</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- RAIT FRIENDS -->
+      <div class="group-panel" id="s-rait" style="display:none">
+        <div class="carousel-wrap">
+          <div class="carousel-track-outer">
+            <div class="carousel-track" id="track-s-rait">
+              <div class="carousel-slide">
+                <div class="cs-photo" style="background:linear-gradient(135deg,var(--lime-l),var(--teal-l))">
+                  <div class="cs-placeholder"><div class="emoji">🎓</div><p>Add RAIT group photo</p></div>
+                </div>
+                <div class="cs-body">
+                  <div class="cs-group-name">RAIT Friends</div>
+                  <div class="cs-members">Add the college crew from RAIT here — the ones who knew Sanket before all of this.</div>
+                  <span class="cs-tag" style="border-color:var(--lime-d);color:var(--lime-d)">College legends</span>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="cs-photo" style="background:linear-gradient(135deg,var(--teal-l),var(--purple-l))">
+                  <div class="cs-placeholder"><div class="emoji">📚</div><p>Add another RAIT memory</p></div>
+                </div>
+                <div class="cs-body">
+                  <div class="cs-group-name">RAIT days</div>
+                  <div class="cs-members">Add a caption or fun memory from college here.</div>
+                  <span class="cs-tag" style="border-color:var(--teal);color:var(--teal)">RAIT represent</span>
+                </div>
+              </div>
+              <div class="add-slide">
+                <div class="add-icon">➕</div>
+                <div class="add-label">Add more RAIT<br>memories</div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-controls">
+            <button class="cc-btn" onclick="scrollCarousel('s-rait',-1)">←</button>
+            <div class="cc-dots" id="dots-s-rait"></div>
+            <button class="cc-btn" onclick="scrollCarousel('s-rait',1)">→</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- COUSINS SANKET -->
+      <div class="group-panel" id="s-cousins" style="display:none">
+        <div class="carousel-wrap">
+          <div class="carousel-track-outer">
+            <div class="carousel-track" id="track-s-cousins">
+              <div class="carousel-slide">
+                <div class="cs-photo" style="background:linear-gradient(135deg,var(--yellow-l),var(--coral-l))">
+                  <div class="cs-placeholder"><div class="emoji">👨‍👩‍👦‍👦</div><p>Add cousins group photo</p></div>
+                </div>
+                <div class="cs-body">
+                  <div class="cs-group-name">Cousins</div>
+                  <div class="cs-members">Add Sanket's cousins here — the family who grew up together and are celebrating the biggest moment.</div>
+                  <span class="cs-tag" style="border-color:var(--yellow-d);color:var(--yellow-d)">Family first</span>
+                </div>
+              </div>
+              <div class="add-slide">
+                <div class="add-icon">➕</div>
+                <div class="add-label">Add more cousin<br>photos</div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-controls">
+            <button class="cc-btn" onclick="scrollCarousel('s-cousins',-1)">←</button>
+            <div class="cc-dots" id="dots-s-cousins"></div>
+            <button class="cc-btn" onclick="scrollCarousel('s-cousins',1)">→</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <!-- ═══════════ SANKET'S FRIENDS ═══════════ -->
-  <div id="sanket-friends" class="group-anchor"></div>
-  <div class="group-section">
-    <div class="group-header">
-      <div class="gh-left reveal-left">
-        <span class="gh-badge badge-sanket-friends">🧡 Sanket's Friends</span>
-        <h2 class="group-title">Sanket's <em>Squad</em></h2>
-        <p class="group-desc">The crew who've been there through everything — the chaos, the laughs, the late nights. Add your people here and let everyone know who's who.</p>
-      </div>
-      <div class="group-count reveal-right">S</div>
-    </div>
-    <div class="people-grid">
+  <div class="section-divider"></div>
 
-      <!-- FRIEND TEMPLATE — duplicate and fill in -->
-      <div class="person-card reveal d1">
-        <div class="pc-photo">
-          <div class="pc-initials">A</div>
-          <div class="pc-flag">🇳🇱</div>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Friend Name</div>
-          <div class="pc-role">How they know Sanket</div>
-          <div class="pc-location">📍 Amsterdam</div>
-          <div class="pc-tags">
-            <span class="pc-tag" style="border-color:var(--coral);color:var(--coral)">AMS crew</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="person-card reveal d2">
-        <div class="pc-photo">
-          <div class="pc-initials">B</div>
-          <div class="pc-flag">🇳🇱</div>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Friend Name</div>
-          <div class="pc-role">How they know Sanket</div>
-          <div class="pc-location">📍 Amsterdam</div>
-          <div class="pc-tags">
-            <span class="pc-tag" style="border-color:var(--coral);color:var(--coral)">AMS crew</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="person-card reveal d3">
-        <div class="pc-photo">
-          <div class="pc-initials">C</div>
-          <div class="pc-flag">🇮🇹</div>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Friend Name</div>
-          <div class="pc-role">How they know Sanket</div>
-          <div class="pc-location">📍 Italy</div>
-          <div class="pc-tags">
-            <span class="pc-tag" style="border-color:var(--purple-d);color:var(--purple-d)">Italy crew</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="person-card reveal d4">
-        <div class="pc-photo">
-          <div class="pc-initials">D</div>
-          <div class="pc-flag">🇮🇳</div>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Friend Name</div>
-          <div class="pc-role">How they know Sanket</div>
-          <div class="pc-location">📍 India</div>
-          <div class="pc-tags">
-            <span class="pc-tag" style="border-color:var(--lime-d);color:var(--lime-d)">India</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="add-person-card reveal d5">
-        <div class="add-icon">➕</div>
-        <div class="add-label">Add more of<br>Sanket's friends</div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="quote-strip reveal">
-    <div class="qs-text">"The best kind of friends are those who show up across time zones and oceans — just to celebrate <em>love.</em>"</div>
+  <div class="quote-strip reveal" style="background:linear-gradient(135deg,#1a0c04,#2D1B0E);margin-top:64px;">
+    <div class="qs-text" style="color:rgba(255,255,255,.8)">"The best kind of friends are those who cross <em>oceans and time zones</em> just to watch you be happy."</div>
     <a href="travel.html" class="btn-outline-white">Travel guide →</a>
   </div>
 
-  <!-- ═══════════ SNEHA'S FRIENDS ═══════════ -->
-  <div id="sneha-friends" class="group-anchor"></div>
-  <div class="group-section">
-    <div class="group-header">
-      <div class="gh-left reveal-left">
-        <span class="gh-badge badge-sneha-friends">💕 Sneha's Friends</span>
-        <h2 class="group-title">Sneha's <em>Crew</em></h2>
-        <p class="group-desc">Sneha's ride-or-dies — the ones who've seen every version of her and love her through all of it. Add your people here.</p>
+  <!-- ══════════════════════════════════════
+       SNEHA'S PORTRAIT + GROUPS
+  ═══════════════════════════════════════ -->
+  <div id="sneha-section" class="group-anchor"></div>
+  <div style="padding-top:72px;">
+
+    <!-- Portrait intro -->
+    <div class="reveal" style="display:grid;grid-template-columns:2fr 1fr;gap:48px;align-items:center;margin-bottom:72px;">
+      <div>
+        <div class="section-label sl-pink">About Sneha</div>
+        <h2 class="section-title" style="margin-bottom:20px;">Her <em>story</em></h2>
+        <p style="font-size:16px;color:var(--mid);line-height:1.85;margin-bottom:16px;">Add Sneha's story here — her passions, her journey through dental college, the Arthrose connection, and everything that makes her her.</p>
+        <p style="font-size:16px;color:var(--mid);line-height:1.85;">Her world stretches from Arthrose to her dental college days, from her closest cousins to the people who have been there through every chapter.</p>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:20px;">
+          <span class="chip pink">Add a passion</span>
+          <span class="chip coral">Add another</span>
+          <span class="chip purple" style="border-color:var(--purple-d);color:var(--purple-d);background:var(--purple-l)">And one more</span>
+        </div>
       </div>
-      <div class="group-count reveal-right">S</div>
+      <div style="border-radius:24px;overflow:hidden;aspect-ratio:3/4;background:#111;position:relative;">
+        <img src="photo-sneha2.jpg" alt="Sneha" style="width:100%;height:100%;object-fit:cover;object-position:center top;">
+        <div style="position:absolute;bottom:0;left:0;right:0;padding:24px;background:linear-gradient(to top,rgba(26,12,4,.9),transparent);">
+          <div style="font-family:'Cormorant',serif;font-size:26px;font-weight:300;color:#fff;">Sneha</div>
+          <div style="font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-top:3px;">The Bride</div>
+        </div>
+      </div>
     </div>
-    <div class="people-grid">
 
-      <div class="person-card reveal d1">
-        <div class="pc-photo">
-          <div class="pc-initials">A</div>
-          <div class="pc-flag">🇮🇳</div>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Friend Name</div>
-          <div class="pc-role">How they know Sneha</div>
-          <div class="pc-location">📍 Pune</div>
-          <div class="pc-tags">
-            <span class="pc-tag" style="border-color:var(--pink-d);color:var(--pink-d)">Bestie</span>
+    <!-- SNEHA'S FRIENDS CAROUSEL -->
+    <div id="sneha-friends" class="group-anchor"></div>
+    <div class="group-section">
+      <div class="group-header reveal">
+        <span class="gh-badge badge-sn-friends">💕 Sneha's Friends</span>
+        <h2 class="group-title">Her <em>Crew</em></h2>
+        <p class="group-desc">From Arthrose to dental college to the cousins who've been there forever — Sneha's people are as warm as she is.</p>
+      </div>
+
+      <!-- Tabs -->
+      <div class="squad-tabs reveal" id="sneha-tabs">
+        <button class="squad-tab active-pink" onclick="showGroup('sn','arthrose',this)" data-color="pink">💃 Arthrose</button>
+        <button class="squad-tab inactive" onclick="showGroup('sn','dental',this)" data-color="pink">🦷 Dental College</button>
+        <button class="squad-tab inactive" onclick="showGroup('sn','cousins',this)" data-color="pink">Cousins 👨‍👩‍👧</button>
+      </div>
+
+      <!-- ARTHROSE -->
+      <div class="group-panel" id="sn-arthrose">
+        <div class="carousel-wrap">
+          <div class="carousel-track-outer">
+            <div class="carousel-track" id="track-sn-arthrose">
+              <div class="carousel-slide">
+                <div class="cs-photo" style="background:linear-gradient(135deg,var(--pink-l),var(--coral-l))">
+                  <div class="cs-placeholder"><div class="emoji">💃</div><p>Add Arthrose group photo</p></div>
+                </div>
+                <div class="cs-body">
+                  <div class="cs-group-name">Arthrose</div>
+                  <div class="cs-members">Add the Arthrose crew names here — the dance & life squad.</div>
+                  <span class="cs-tag" style="border-color:var(--pink-d);color:var(--pink-d)">Arthrose family</span>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="cs-photo" style="background:linear-gradient(135deg,var(--coral-l),var(--yellow-l))">
+                  <div class="cs-placeholder"><div class="emoji">🎶</div><p>Add another Arthrose memory</p></div>
+                </div>
+                <div class="cs-body">
+                  <div class="cs-group-name">Arthrose nights</div>
+                  <div class="cs-members">Add a caption or fun memory from Arthrose here.</div>
+                  <span class="cs-tag" style="border-color:var(--coral);color:var(--coral)">Dancing queens</span>
+                </div>
+              </div>
+              <div class="add-slide">
+                <div class="add-icon">➕</div>
+                <div class="add-label">Add more Arthrose<br>memories</div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-controls">
+            <button class="cc-btn" onclick="scrollCarousel('sn-arthrose',-1)">←</button>
+            <div class="cc-dots" id="dots-sn-arthrose"></div>
+            <button class="cc-btn" onclick="scrollCarousel('sn-arthrose',1)">→</button>
           </div>
         </div>
       </div>
 
-      <div class="person-card reveal d2">
-        <div class="pc-photo">
-          <div class="pc-initials">B</div>
-          <div class="pc-flag">🇮🇳</div>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Friend Name</div>
-          <div class="pc-role">How they know Sneha</div>
-          <div class="pc-location">📍 Mumbai</div>
-          <div class="pc-tags">
-            <span class="pc-tag" style="border-color:var(--pink-d);color:var(--pink-d)">College friend</span>
+      <!-- DENTAL COLLEGE -->
+      <div class="group-panel" id="sn-dental" style="display:none">
+        <div class="carousel-wrap">
+          <div class="carousel-track-outer">
+            <div class="carousel-track" id="track-sn-dental">
+              <div class="carousel-slide">
+                <div class="cs-photo" style="background:linear-gradient(135deg,var(--teal-l),var(--purple-l))">
+                  <div class="cs-placeholder"><div class="emoji">🦷</div><p>Add dental college group photo</p></div>
+                </div>
+                <div class="cs-body">
+                  <div class="cs-group-name">Dental College</div>
+                  <div class="cs-members">Add the dental college squad — the ones who survived clinical years together.</div>
+                  <span class="cs-tag" style="border-color:var(--teal);color:var(--teal)">Dr. Sneha's crew</span>
+                </div>
+              </div>
+              <div class="carousel-slide">
+                <div class="cs-photo" style="background:linear-gradient(135deg,var(--purple-l),var(--pink-l))">
+                  <div class="cs-placeholder"><div class="emoji">📚</div><p>Add a college memory</p></div>
+                </div>
+                <div class="cs-body">
+                  <div class="cs-group-name">College days</div>
+                  <div class="cs-members">Add a fun caption from dental college here.</div>
+                  <span class="cs-tag" style="border-color:var(--purple-d);color:var(--purple-d)">Class of legends</span>
+                </div>
+              </div>
+              <div class="add-slide">
+                <div class="add-icon">➕</div>
+                <div class="add-label">Add more dental<br>college memories</div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-controls">
+            <button class="cc-btn" onclick="scrollCarousel('sn-dental',-1)">←</button>
+            <div class="cc-dots" id="dots-sn-dental"></div>
+            <button class="cc-btn" onclick="scrollCarousel('sn-dental',1)">→</button>
           </div>
         </div>
       </div>
 
-      <div class="person-card reveal d3">
-        <div class="pc-photo">
-          <div class="pc-initials">C</div>
-          <div class="pc-flag">🇮🇳</div>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Friend Name</div>
-          <div class="pc-role">How they know Sneha</div>
-          <div class="pc-location">📍 Pune</div>
-          <div class="pc-tags">
-            <span class="pc-tag" style="border-color:var(--coral);color:var(--coral)">Work friend</span>
+      <!-- COUSINS SNEHA -->
+      <div class="group-panel" id="sn-cousins" style="display:none">
+        <div class="carousel-wrap">
+          <div class="carousel-track-outer">
+            <div class="carousel-track" id="track-sn-cousins">
+              <div class="carousel-slide">
+                <div class="cs-photo" style="background:linear-gradient(135deg,var(--purple-l),var(--pink-l))">
+                  <div class="cs-placeholder"><div class="emoji">👨‍👩‍👧‍👦</div><p>Add cousins group photo</p></div>
+                </div>
+                <div class="cs-body">
+                  <div class="cs-group-name">Cousins</div>
+                  <div class="cs-members">Add Sneha's cousins here — the family that has been there since the very beginning.</div>
+                  <span class="cs-tag" style="border-color:var(--purple-d);color:var(--purple-d)">Always & forever</span>
+                </div>
+              </div>
+              <div class="add-slide">
+                <div class="add-icon">➕</div>
+                <div class="add-label">Add more cousin<br>photos</div>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-controls">
+            <button class="cc-btn" onclick="scrollCarousel('sn-cousins',-1)">←</button>
+            <div class="cc-dots" id="dots-sn-cousins"></div>
+            <button class="cc-btn" onclick="scrollCarousel('sn-cousins',1)">→</button>
           </div>
         </div>
       </div>
-
-      <div class="add-person-card reveal d4">
-        <div class="add-icon">➕</div>
-        <div class="add-label">Add more of<br>Sneha's friends</div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- ═══════════ SANKET'S FAMILY ═══════════ -->
-  <div id="sanket-family" class="group-anchor"></div>
-  <div class="group-section">
-    <div class="group-header">
-      <div class="gh-left reveal-left">
-        <span class="gh-badge badge-sanket-fam">💛 Sanket's Family</span>
-        <h2 class="group-title">Sanket's <em>Family</em></h2>
-        <p class="group-desc">The people who raised Sanket, shaped him, and have been waiting for this day. Add family members here so everyone can put faces to names.</p>
-      </div>
-      <div class="group-count reveal-right">♥</div>
-    </div>
-    <div class="people-grid">
-
-      <div class="person-card reveal d1">
-        <div class="pc-photo" style="background:var(--yellow-l)">
-          <div class="pc-initials" style="color:var(--yellow-d)">M</div>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Sanket's Mother</div>
-          <div class="pc-role">The heart of the family</div>
-          <div class="pc-location">📍 Add city</div>
-          <div class="pc-tags">
-            <span class="pc-tag" style="border-color:var(--yellow-d);color:var(--yellow-d)">Mother</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="person-card reveal d2">
-        <div class="pc-photo" style="background:var(--yellow-l)">
-          <div class="pc-initials" style="color:var(--yellow-d)">F</div>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Sanket's Father</div>
-          <div class="pc-role">The proud dad</div>
-          <div class="pc-location">📍 Add city</div>
-          <div class="pc-tags">
-            <span class="pc-tag" style="border-color:var(--yellow-d);color:var(--yellow-d)">Father</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="person-card reveal d3">
-        <div class="pc-photo" style="background:var(--yellow-l)">
-          <div class="pc-initials" style="color:var(--yellow-d)">S</div>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Add sibling / relative</div>
-          <div class="pc-role">Relation to Sanket</div>
-          <div class="pc-location">📍 Add city</div>
-          <div class="pc-tags">
-            <span class="pc-tag" style="border-color:var(--yellow-d);color:var(--yellow-d)">Family</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="add-person-card reveal d4">
-        <div class="add-icon">➕</div>
-        <div class="add-label">Add more of<br>Sanket's family</div>
-      </div>
-
-    </div>
-  </div>
-
-  <div class="quote-strip reveal" style="background:linear-gradient(135deg,#0E1A2D,#1A2D4A)">
-    <div class="qs-text">"Family is not an important thing — it's <em>everything.</em>"</div>
-    <a href="index.html#rsvp" class="btn-primary">RSVP now →</a>
-  </div>
-
-  <!-- ═══════════ SNEHA'S FAMILY ═══════════ -->
-  <div id="sneha-family" class="group-anchor"></div>
-  <div class="group-section">
-    <div class="group-header">
-      <div class="gh-left reveal-left">
-        <span class="gh-badge badge-sneha-fam">💜 Sneha's Family</span>
-        <h2 class="group-title">Sneha's <em>Family</em></h2>
-        <p class="group-desc">The family who raised Sneha, nurtured her, and are overjoyed to welcome Sanket. Add family members and fun facts about each one.</p>
-      </div>
-      <div class="group-count reveal-right">♥</div>
-    </div>
-    <div class="people-grid">
-
-      <div class="person-card reveal d1">
-        <div class="pc-photo" style="background:var(--purple-l)">
-          <div class="pc-initials" style="color:var(--purple-d)">M</div>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Sneha's Mother</div>
-          <div class="pc-role">The heart of the family</div>
-          <div class="pc-location">📍 Add city</div>
-          <div class="pc-tags">
-            <span class="pc-tag" style="border-color:var(--purple-d);color:var(--purple-d)">Mother</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="person-card reveal d2">
-        <div class="pc-photo" style="background:var(--purple-l)">
-          <div class="pc-initials" style="color:var(--purple-d)">F</div>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Sneha's Father</div>
-          <div class="pc-role">The proud dad</div>
-          <div class="pc-location">📍 Add city</div>
-          <div class="pc-tags">
-            <span class="pc-tag" style="border-color:var(--purple-d);color:var(--purple-d)">Father</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="person-card reveal d3">
-        <div class="pc-photo" style="background:var(--purple-l)">
-          <div class="pc-initials" style="color:var(--purple-d)">S</div>
-        </div>
-        <div class="pc-body">
-          <div class="pc-name">Add sibling / relative</div>
-          <div class="pc-role">Relation to Sneha</div>
-          <div class="pc-location">📍 Add city</div>
-          <div class="pc-tags">
-            <span class="pc-tag" style="border-color:var(--purple-d);color:var(--purple-d)">Family</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="add-person-card reveal d4">
-        <div class="add-icon">➕</div>
-        <div class="add-label">Add more of<br>Sneha's family</div>
-      </div>
-
     </div>
   </div>
 
   <!-- BOTTOM CTA -->
   <div style="margin-top:72px;padding:48px;border-radius:24px;text-align:center;background:linear-gradient(135deg,#1a0c04,#2D1B0E);" class="reveal">
-    <p style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:14px">24 & 25 November 2026</p>
+    <p style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:14px">24 & 25 November 2026 · Pune</p>
     <h2 style="font-family:'Cormorant',serif;font-size:52px;font-weight:300;color:#fff;margin-bottom:14px">See you <em style="font-style:italic;color:var(--yellow)">all there!</em></h2>
     <p style="font-size:16px;color:rgba(255,255,255,.45);margin-bottom:32px;">Marigold Banquets, Pune · Please RSVP by 1 October 2026</p>
     <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
@@ -478,6 +584,102 @@
     <a href="highlights.html">Highlights</a><a href="travel.html">Travel</a><a href="index.html#rsvp">RSVP</a>
   </div>
 </footer>
+
 <script src="shared.js"></script>
+<script>
+// ── CAROUSEL LOGIC ──
+const carouselState = {};
+
+function initCarousel(id) {
+  const track = document.getElementById('track-' + id);
+  if (!track) return;
+  const slides = track.children;
+  const count = slides.length;
+  carouselState[id] = { pos: 0, count };
+  updateDots(id);
+  updateCarousel(id);
+}
+
+function scrollCarousel(id, dir) {
+  const s = carouselState[id];
+  if (!s) return;
+  s.pos = Math.max(0, Math.min(s.count - 1, s.pos + dir));
+  updateCarousel(id);
+  updateDots(id);
+}
+
+function updateCarousel(id) {
+  const track = document.getElementById('track-' + id);
+  if (!track) return;
+  const s = carouselState[id];
+  const slideW = track.children[0] ? track.children[0].offsetWidth + 20 : 0;
+  track.style.transform = `translateX(-${s.pos * slideW}px)`;
+}
+
+function updateDots(id) {
+  const container = document.getElementById('dots-' + id);
+  if (!container) return;
+  const s = carouselState[id];
+  container.innerHTML = '';
+  for (let i = 0; i < s.count; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'cc-dot' + (i === s.pos ? ' active' : '');
+    const col = document.getElementById(id) ? document.getElementById(id).closest('.group-panel') : null;
+    const isSneh = id.startsWith('sn-');
+    dot.style.background = i === s.pos ? (isSneh ? 'var(--pink)' : 'var(--coral)') : 'rgba(0,0,0,.15)';
+    dot.onclick = () => { s.pos = i; updateCarousel(id); updateDots(id); };
+    container.appendChild(dot);
+  }
+}
+
+// ── GROUP TABS ──
+function showGroup(person, group, btn) {
+  const prefix = person === 's' ? 's' : 'sn';
+  const panels = document.querySelectorAll('#' + prefix + '-' + (person === 's' ? 'ams, #s-tpc, #s-rait, #s-cousins' : 'arthrose, #sn-dental, #sn-cousins'));
+
+  // Hide all panels in this person's section
+  if (person === 's') {
+    ['s-ams','s-tpc','s-rait','s-cousins'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+  } else {
+    ['sn-arthrose','sn-dental','sn-cousins'].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.style.display = 'none';
+    });
+  }
+
+  // Show target
+  const targetId = prefix + '-' + group;
+  const target = document.getElementById(targetId);
+  if (target) {
+    target.style.display = 'block';
+    initCarousel(targetId);
+  }
+
+  // Update tab styles
+  const tabContainer = document.getElementById(person === 's' ? 'sanket-tabs' : 'sneha-tabs');
+  if (tabContainer) {
+    tabContainer.querySelectorAll('.squad-tab').forEach(t => {
+      t.className = 'squad-tab inactive';
+    });
+    const color = person === 's' ? 'coral' : 'pink';
+    btn.className = 'squad-tab active-' + color;
+  }
+}
+
+// Init all visible carousels on load
+document.addEventListener('DOMContentLoaded', () => {
+  initCarousel('s-ams');
+  initCarousel('sn-arthrose');
+  window.addEventListener('resize', () => {
+    Object.keys(carouselState).forEach(id => {
+      const panel = document.getElementById(id);
+      if (panel && panel.style.display !== 'none') updateCarousel(id);
+    });
+  });
+});
+</script>
 </body>
 </html>
