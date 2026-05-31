@@ -56,7 +56,7 @@ function closeMenu(){
   const d=document.getElementById('hc-d');
   if(!d)return;
   function tick(){
-    const t=new Date('2025-11-24T16:00:00+05:30'),now=new Date(),diff=t-now;
+    const t=new Date('2026-11-24T16:00:00+05:30'),now=new Date(),diff=t-now;
     if(diff<=0){const b=document.getElementById('hcdown');if(b)b.style.display='none';return;}
     d.textContent=Math.floor(diff/86400000);
     document.getElementById('hc-h').textContent=String(Math.floor(diff%86400000/3600000)).padStart(2,'0');

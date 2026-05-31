@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Our Story — Sanket & Sneha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* HERO */
+.story-hero{
+  min-height:100vh;display:flex;align-items:flex-end;
+  padding:0 0 80px;position:relative;overflow:hidden;
+}
+.sh-photo{
+  position:absolute;inset:0;z-index:0;
+  background:url('photo-together.jpg') center 25% / cover no-repeat;
+}
+.sh-overlay{
+  position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to top, rgba(26,12,4,.95) 0%, rgba(26,12,4,.7) 40%, rgba(26,12,4,.2) 80%, transparent 100%);
+}
+.sh-content{
+  position:relative;z-index:2;
+  max-width:1100px;margin:0 auto;padding:0 48px;width:100%;
+}
+.sh-eyebrow{
+  font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;
+  color:rgba(255,255,255,.5);margin-bottom:18px;
+  display:flex;align-items:center;gap:10px;
+}
+.sh-eyebrow::before{content:'';width:24px;height:1px;background:rgba(255,255,255,.3);}
+.sh-title{
+  font-family:'Cormorant',serif;
+  font-size:clamp(56px,9vw,120px);font-weight:300;line-height:.95;
+  color:#fff;letter-spacing:-.02em;
+}
+.sh-title em{font-style:italic;color:var(--yellow);}
+.sh-sub{
+  font-size:18px;color:rgba(255,255,255,.55);
+  margin-top:20px;line-height:1.75;max-width:500px;
+}
+.sh-scroll{
+  display:flex;align-items:center;gap:12px;margin-top:36px;
+  font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:rgba(255,255,255,.4);
+}
+.sh-scroll::after{content:'';width:40px;height:1px;background:rgba(255,255,255,.25);}
+
+/* BODY */
+.story-body{background:#fff;}
+.story-inner{max-width:1060px;margin:0 auto;padding:0 48px;}
+
+/* INTRO QUOTE */
+.story-quote{
+  padding:80px 0 60px;text-align:center;
+  border-bottom:1px solid rgba(0,0,0,.07);
+}
+.sq-text{
+  font-family:'Cormorant',serif;
+  font-size:clamp(26px,3.5vw,44px);font-weight:300;font-style:italic;
+  line-height:1.4;color:var(--dark);max-width:700px;margin:0 auto;
+}
+.sq-text em{color:var(--coral);}
+.sq-attr{
+  margin-top:24px;font-size:13px;letter-spacing:.12em;
+  text-transform:uppercase;color:var(--mid);
+  display:flex;align-items:center;justify-content:center;gap:12px;
+}
+.sq-attr::before,.sq-attr::after{content:'';width:32px;height:1px;background:rgba(0,0,0,.15);}
+
+/* PEOPLE CARDS */
+.people-section{padding:80px 0;border-bottom:1px solid rgba(0,0,0,.07);}
+.people-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;}
+.person-block{}
+.person-photo{
+  aspect-ratio:3/4;border-radius:24px;overflow:hidden;
+  margin-bottom:28px;position:relative;
+  transition:transform .4s cubic-bezier(.16,1,.3,1);
+}
+.person-photo:hover{transform:scale(1.02);}
+.person-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;}
+.person-photo .photo-badge{
+  position:absolute;bottom:20px;left:20px;right:20px;
+  padding:14px 18px;border-radius:14px;
+  background:rgba(253,248,242,.92);backdrop-filter:blur(10px);
+  display:flex;align-items:center;justify-content:space-between;
+}
+.photo-badge h3{font-family:'Cormorant',serif;font-size:22px;font-weight:400;}
+.photo-badge .role{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);}
+.person-content h3{
+  font-family:'Cormorant',serif;font-size:36px;font-weight:400;
+  margin-bottom:4px;
+}
+.person-content .role-tag{
+  display:inline-block;font-size:10px;font-weight:600;letter-spacing:.14em;
+  text-transform:uppercase;padding:3px 12px;border-radius:20px;margin-bottom:18px;
+}
+.sanket-tag{background:var(--coral-l);color:var(--coral);}
+.sneha-tag{background:var(--pink-l);color:var(--pink-d);}
+.person-content p{font-size:16px;color:var(--mid);line-height:1.85;margin-bottom:16px;}
+.person-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;}
+.p-chip{font-size:12px;font-weight:500;padding:5px 13px;border-radius:20px;border:1.5px solid;}
+
+/* TIMELINE */
+.timeline-section{padding:80px 0;border-bottom:1px solid rgba(0,0,0,.07);}
+.ts-header{text-align:center;margin-bottom:60px;}
+.story-tl{position:relative;max-width:720px;margin:0 auto;}
+.story-tl::before{
+  content:'';position:absolute;left:50%;top:0;bottom:0;
+  width:1.5px;background:linear-gradient(to bottom,var(--coral),var(--yellow),var(--lime));
+  transform:translateX(-50%);
+}
+.stl-item{
+  display:grid;grid-template-columns:1fr 56px 1fr;
+  gap:0;align-items:center;margin-bottom:48px;
+}
+.stl-item:last-child{margin-bottom:0;}
+.stl-content{padding:0 32px;}
+.stl-content.right{text-align:right;}
+.stl-content.left{text-align:left;}
+.stl-center{display:flex;align-items:center;justify-content:center;position:relative;z-index:2;}
+.stl-dot{
+  width:44px;height:44px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:20px;border:3px solid #fff;
+  box-shadow:0 4px 16px rgba(0,0,0,.12);
+  flex-shrink:0;
+}
+.stl-year{
+  font-family:'Cormorant',serif;font-size:12px;font-weight:600;
+  letter-spacing:.1em;text-transform:uppercase;
+  color:var(--mid);margin-bottom:6px;
+}
+.stl-event-title{
+  font-family:'Cormorant',serif;font-size:22px;font-weight:400;
+  color:var(--dark);margin-bottom:6px;
+  line-height:1.2;
+}
+.stl-event-title em{font-style:italic;color:var(--coral);}
+.stl-desc{font-size:14px;color:var(--mid);line-height:1.7;}
+
+/* GALLERY */
+.gallery-section{padding:80px 0;border-bottom:1px solid rgba(0,0,0,.07);}
+.gallery-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:40px;flex-wrap:wrap;gap:16px;}
+.gallery-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr 1fr;
+  grid-template-rows:260px 260px;
+  gap:16px;
+}
+.gallery-item{border-radius:20px;overflow:hidden;position:relative;}
+.gallery-item img{width:100%;height:100%;object-fit:cover;object-position:center top;display:block;transition:transform .5s cubic-bezier(.16,1,.3,1);}
+.gallery-item:hover img{transform:scale(1.06);}
+.gallery-item.tall{grid-row:span 2;}
+.gallery-caption{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:14px 18px;
+  background:linear-gradient(to top,rgba(26,12,4,.75),transparent);
+  font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:rgba(255,255,255,.7);
+  transform:translateY(100%);transition:transform .3s;
+}
+.gallery-item:hover .gallery-caption{transform:translateY(0);}
+
+/* QUOTE BAND */
+.quote-band{
+  padding:80px 0;text-align:center;
+  background:linear-gradient(135deg,#1a0c04,#2D1B0E);
+  position:relative;overflow:hidden;
+}
+.quote-band::before{
+  content:'';position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.03) 1px,transparent 1px);
+  background-size:24px 24px;pointer-events:none;
+}
+.qb-inner{position:relative;z-index:1;max-width:1060px;margin:0 auto;padding:0 48px;}
+.qb-text{
+  font-family:'Cormorant',serif;
+  font-size:clamp(24px,3.5vw,42px);font-weight:300;font-style:italic;
+  color:rgba(255,255,255,.85);line-height:1.5;max-width:680px;margin:0 auto;
+}
+.qb-text em{color:var(--yellow);}
+.qb-cta{margin-top:40px;display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap;}
+
+/* RSVP CTA */
+.story-rsvp-cta{
+  padding:80px 0;text-align:center;background:var(--cream);
+}
+.src-inner{max-width:600px;margin:0 auto;padding:0 48px;}
+
+@media(max-width:900px){
+  .sh-content{padding:0 20px;}
+  .story-inner{padding:0 20px;}
+  .people-grid{grid-template-columns:1fr;}
+  .story-tl::before{left:20px;}
+  .stl-item{grid-template-columns:40px 1fr;grid-template-rows:auto;}
+  .stl-center{grid-column:1;grid-row:1;justify-content:flex-start;}
+  .stl-content.left,.stl-content.right{grid-column:2;text-align:left;padding:0 0 0 16px;}
+  .stl-content.right.hide-mobile{display:none;}
+  .gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:200px 200px 200px;}
+  .gallery-item.tall{grid-row:span 1;}
+  .qb-inner{padding:0 20px;}
+  .src-inner{padding:0 20px;}
+  .story-quote{padding:52px 0 40px;}
+  .timeline-section,.people-section,.gallery-section{padding:52px 0;}
+}
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+
+<nav class="main-nav" id="main-nav">
+  <a href="index.html" class="nav-logo">S & S</a>
+  <div class="nav-links">
+    <a href="index.html#about">About</a>
+    <a href="story.html" class="active">Our Story</a>
+    <a href="highlights.html">Highlights</a>
+    <a href="travel.html">Travel</a>
+    <a href="attire.html">Attire</a>
+    <a href="index.html#rsvp" class="nav-rsvp">RSVP</a>
+  </div>
+  <div class="hamburger" id="ham" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mmenu">
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="story.html" onclick="closeMenu()">Our Story</a>
+  <a href="highlights.html" onclick="closeMenu()">Highlights</a>
+  <a href="travel.html" onclick="closeMenu()">Travel</a>
+  <a href="attire.html" onclick="closeMenu()">Attire</a>
+  <a href="index.html#rsvp" onclick="closeMenu()" style="color:var(--coral)">RSVP →</a>
+</div>
+
+<!-- HERO -->
+<div class="story-hero">
+  <div class="sh-photo"></div>
+  <div class="sh-overlay"></div>
+  <div class="sh-content">
+    <div class="sh-eyebrow">Sanket & Sneha · 2026</div>
+    <h1 class="sh-title">Our<br><em>Story</em></h1>
+    <p class="sh-sub">Every love story is beautiful — but ours is our favourite. Here's how it all began.</p>
+    <div class="sh-scroll">Keep scrolling</div>
+  </div>
+</div>
+
+<!-- BODY -->
+<div class="story-body">
+
+  <!-- INTRO QUOTE -->
+  <div class="story-inner">
+    <div class="story-quote reveal">
+      <p class="sq-text">"Add your favourite quote here — something that captures how you feel about each other, or a line that means something to both of you."<em> — Sanket & Sneha</em></p>
+      <div class="sq-attr">24 · 25 November 2026 · Pune</div>
+    </div>
+  </div>
+
+  <!-- PEOPLE -->
+  <div class="story-inner">
+    <div class="people-section">
+      <div class="people-grid">
+
+        <!-- SNEHA -->
+        <div class="person-block reveal-left">
+          <div class="person-photo">
+            <img src="photo-sneha.jpg" alt="Sneha">
+            <div class="photo-badge">
+              <div><h3>Sneha</h3><div class="role">The Bride</div></div>
+              <div style="font-size:22px">💕</div>
+            </div>
+          </div>
+          <div class="person-content">
+            <h3>Sneha</h3>
+            <span class="role-tag sneha-tag">The Bride</span>
+            <p>Add Sneha's story here — what makes her her. Her passions, her dreams, the little things that make her laugh. Tell your guests who she is beyond just the bride.</p>
+            <p>A few lines about what she loves, where she grew up, and what excites her about this next chapter.</p>
+            <div class="person-chips">
+              <span class="p-chip" style="border-color:var(--pink-d);color:var(--pink-d)">Add a passion</span>
+              <span class="p-chip" style="border-color:var(--coral);color:var(--coral)">Add another</span>
+              <span class="p-chip" style="border-color:var(--yellow-d);color:var(--yellow-d)">And one more</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- SANKET -->
+        <div class="person-block reveal-right">
+          <div class="person-photo">
+            <img src="photo-sanket.jpg" alt="Sanket">
+            <div class="photo-badge">
+              <div><h3>Sanket</h3><div class="role">The Groom</div></div>
+              <div style="font-size:22px">💛</div>
+            </div>
+          </div>
+          <div class="person-content">
+            <h3>Sanket</h3>
+            <span class="role-tag sanket-tag">The Groom</span>
+            <p>Add Sanket's story here — his adventures, his quirks, what makes him the person Sneha chose to spend her life with. The glasses, the smile, the whole story.</p>
+            <p>A few lines about what drives him, where he's been, and what he's most excited about for this wedding.</p>
+            <div class="person-chips">
+              <span class="p-chip" style="border-color:var(--coral);color:var(--coral)">Add a passion</span>
+              <span class="p-chip" style="border-color:var(--lime-d);color:var(--lime-d)">Add another</span>
+              <span class="p-chip" style="border-color:var(--purple-d);color:var(--purple-d)">And one more</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- TIMELINE -->
+  <div style="background:var(--cream);padding:0;">
+    <div class="story-inner">
+      <div class="timeline-section">
+        <div class="ts-header reveal">
+          <div class="section-label sl-coral" style="justify-content:center">How we got here</div>
+          <h2 class="section-title">Our <em>timeline</em></h2>
+        </div>
+        <div class="story-tl">
+
+          <div class="stl-item reveal">
+            <div class="stl-content right">
+              <div class="stl-year">Add year</div>
+              <div class="stl-event-title">The <em>first meeting</em></div>
+              <div class="stl-desc">Add the story of how Sanket and Sneha first met. Where was it? What happened? Make it memorable!</div>
+            </div>
+            <div class="stl-center">
+              <div class="stl-dot" style="background:var(--coral-l)">✨</div>
+            </div>
+            <div class="stl-content left"></div>
+          </div>
+
+          <div class="stl-item reveal">
+            <div class="stl-content right hide-mobile"></div>
+            <div class="stl-center">
+              <div class="stl-dot" style="background:var(--yellow-l)">💛</div>
+            </div>
+            <div class="stl-content left">
+              <div class="stl-year">Add year</div>
+              <div class="stl-event-title"><em>Falling</em> in love</div>
+              <div class="stl-desc">Add the story of when things changed — when friendship became something more. The moment you both knew.</div>
+            </div>
+          </div>
+
+          <div class="stl-item reveal">
+            <div class="stl-content right">
+              <div class="stl-year">Add year</div>
+              <div class="stl-event-title">Adventures <em>together</em></div>
+              <div class="stl-desc">The travels, the shared experiences, the memories that built the foundation of your life together.</div>
+            </div>
+            <div class="stl-center">
+              <div class="stl-dot" style="background:var(--lime-l)">🌍</div>
+            </div>
+            <div class="stl-content left"></div>
+          </div>
+
+          <div class="stl-item reveal">
+            <div class="stl-content right hide-mobile"></div>
+            <div class="stl-center">
+              <div class="stl-dot" style="background:var(--pink-l)">💍</div>
+            </div>
+            <div class="stl-content left">
+              <div class="stl-year">Add year</div>
+              <div class="stl-event-title">The <em>proposal</em></div>
+              <div class="stl-desc">Add the proposal story here — where, when, and how it happened. This is the one everyone will ask about!</div>
+            </div>
+          </div>
+
+          <div class="stl-item reveal">
+            <div class="stl-content right">
+              <div class="stl-year">November 2026</div>
+              <div class="stl-event-title"><em>The wedding</em></div>
+              <div class="stl-desc">Marigold Banquets, Pune. Two days, the people we love most, and a lifetime together starting right here.</div>
+            </div>
+            <div class="stl-center">
+              <div class="stl-dot" style="background:linear-gradient(135deg,var(--coral),var(--yellow))">🎉</div>
+            </div>
+            <div class="stl-content left"></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- GALLERY -->
+  <div class="story-inner">
+    <div class="gallery-section">
+      <div class="gallery-header reveal">
+        <div>
+          <div class="section-label sl-yellow">Photos</div>
+          <h2 class="section-title">Us, <em>together</em></h2>
+        </div>
+        <p style="font-size:14px;color:var(--mid);max-width:300px;text-align:right">More photos coming as we get closer to the big day!</p>
+      </div>
+      <div class="gallery-grid reveal">
+        <div class="gallery-item tall">
+          <img src="photo-together.jpg" alt="Sanket and Sneha together">
+          <div class="gallery-caption">Together</div>
+        </div>
+        <div class="gallery-item">
+          <img src="photo-sanket.jpg" alt="Sanket" style="object-position:center 20%">
+          <div class="gallery-caption">Sanket</div>
+        </div>
+        <div class="gallery-item">
+          <img src="photo-sneha.jpg" alt="Sneha">
+          <div class="gallery-caption">Sneha</div>
+        </div>
+        <div class="gallery-item" style="background:linear-gradient(135deg,var(--coral-l),var(--yellow-l));display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;">
+          <div style="font-size:36px">📸</div>
+          <div style="font-size:13px;color:var(--mid);font-weight:500;text-align:center;padding:0 16px">Add more photos here</div>
+        </div>
+        <div class="gallery-item" style="background:linear-gradient(135deg,var(--purple-l),var(--pink-l));display:flex;align-items:center;justify-content:center;flex-direction:column;gap:10px;">
+          <div style="font-size:36px">🌸</div>
+          <div style="font-size:13px;color:var(--mid);font-weight:500;text-align:center;padding:0 16px">More coming soon</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- QUOTE BAND -->
+<div class="quote-band">
+  <div class="qb-inner">
+    <div class="reveal">
+      <p class="qb-text">"And now, after everything — we get to <em>choose each other, every single day.</em> That's the whole story."</p>
+      <div class="qb-cta">
+        <a href="highlights.html" class="btn-outline-white">View celebrations</a>
+        <a href="index.html#rsvp" class="btn-primary">RSVP now →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- RSVP CTA -->
+<div class="story-rsvp-cta">
+  <div class="src-inner reveal">
+    <div class="section-label sl-coral" style="justify-content:center;margin-bottom:16px">Join us</div>
+    <h2 class="section-title" style="margin-bottom:12px">Be part of our <em>story</em></h2>
+    <p style="font-size:16px;color:var(--mid);margin-bottom:32px;line-height:1.7">24 & 25 November 2026 · Marigold Banquets, Pune<br>Please RSVP by 1 October 2026</p>
+    <a href="index.html#rsvp" class="btn-primary" style="font-size:14px;padding:14px 40px">Send your RSVP →</a>
+  </div>
+</div>
+
+<footer class="main-footer">
+  <div class="footer-logo">Sanket & Sneha</div>
+  <div class="footer-meta">24–25 November 2026 · Marigold Banquets, Pune</div>
+  <div class="footer-links">
+    <a href="story.html">Our Story</a><a href="highlights.html">Highlights</a>
+    <a href="travel.html">Travel</a><a href="attire.html">Attire</a><a href="index.html#rsvp">RSVP</a>
+  </div>
+</footer>
+
+<script src="shared.js"></script>
+</body>
+</html>

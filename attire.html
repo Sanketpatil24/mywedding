@@ -7,75 +7,133 @@
 <link rel="stylesheet" href="shared.css">
 <style>
 .page-body{background:#fff;padding:80px 48px;}
-.page-inner{max-width:1060px;margin:0 auto;}
+.page-inner{max-width:1080px;margin:0 auto;}
 
 /* DAY SECTIONS */
-.day-section{margin-bottom:80px;}
+.day-section{margin-bottom:96px;}
 .day-section:last-of-type{margin-bottom:0;}
 .day-anchor{display:block;position:relative;top:calc(-1 * var(--nav-h) - 20px);}
-.day-header{padding:32px 36px;border-radius:var(--radius);margin-bottom:36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;}
+
+/* DAY HEADER */
+.day-header{
+  padding:32px 36px;border-radius:var(--radius);margin-bottom:48px;
+  display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;
+}
 .dh-day1{background:linear-gradient(135deg,var(--yellow-l),var(--coral-l));border:1.5px solid rgba(232,86,58,.15);}
 .dh-day2{background:linear-gradient(135deg,var(--purple-l),var(--pink-l));border:1.5px solid rgba(224,92,138,.15);}
 .dh-badge{font-size:10px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;margin-bottom:8px;}
 .dh-day1 .dh-badge{color:var(--coral);}
 .dh-day2 .dh-badge{color:var(--pink-d);}
-.dh-title{font-family:'Cormorant',serif;font-size:clamp(28px,4vw,44px);font-weight:300;line-height:1.1;}
+.dh-title{font-family:'Cormorant',serif;font-size:clamp(28px,4vw,48px);font-weight:300;line-height:1.1;}
 .dh-title em{font-style:italic;}
 .dh-day1 .dh-title em{color:var(--coral);}
 .dh-day2 .dh-title em{color:var(--pink);}
-.dh-time{text-align:right;}
-.dh-time .t{font-family:'Cormorant',serif;font-size:32px;font-weight:300;}
-.dh-time .tl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-top:2px;}
+.dh-time{text-align:right;flex-shrink:0;}
+.dh-time .t{font-family:'Cormorant',serif;font-size:32px;font-weight:300;line-height:1;}
+.dh-time .tl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-top:3px;}
+
+/* EVENT BLOCK — title + outfit grid */
+.event-block{margin-bottom:56px;}
+.event-block:last-child{margin-bottom:0;}
+.event-block-header{
+  display:flex;align-items:center;gap:14px;margin-bottom:28px;
+  padding-bottom:20px;border-bottom:1px solid rgba(0,0,0,.07);
+}
+.eb-icon{
+  width:48px;height:48px;border-radius:14px;
+  display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;
+}
+.eb-tag{font-size:10px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:3px;}
+.eb-title{font-family:'Cormorant',serif;font-size:28px;font-weight:400;line-height:1;}
+.eb-time{margin-left:auto;text-align:right;flex-shrink:0;}
+.eb-time .t{font-size:14px;font-weight:600;color:var(--dark);}
+.eb-time .tl{font-size:11px;color:var(--mid);margin-top:2px;}
+
+/* OUTFIT GRID — 2 col (women / men) each with image cards */
+.outfit-cols{display:grid;grid-template-columns:1fr 1fr;gap:28px;}
+.outfit-col{}
+.oc-label{
+  font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--mid);margin-bottom:16px;display:flex;align-items:center;gap:8px;
+}
+.oc-label::before{content:'';width:16px;height:2px;border-radius:2px;background:currentColor;}
+
+/* IMAGE CAROUSEL */
+.outfit-images{
+  display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px;
+}
+.outfit-img-card{
+  border-radius:14px;overflow:hidden;aspect-ratio:3/4;
+  border:1.5px solid rgba(0,0,0,.07);position:relative;
+  cursor:none;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+  background:var(--cream);
+}
+.outfit-img-card:hover{transform:translateY(-4px) scale(1.02);box-shadow:0 16px 36px rgba(0,0,0,.12);border-color:transparent;z-index:2;}
+.outfit-img-card img{
+  width:100%;height:100%;object-fit:cover;object-position:center top;
+  display:block;transition:transform .5s cubic-bezier(.16,1,.3,1);
+}
+.outfit-img-card:hover img{transform:scale(1.07);}
+.outfit-img-card .img-label{
+  position:absolute;bottom:0;left:0;right:0;
+  padding:10px 12px;
+  background:linear-gradient(to top,rgba(26,12,4,.8),transparent);
+  font-size:11px;letter-spacing:.06em;color:rgba(255,255,255,.85);
+  font-weight:500;
+  transform:translateY(100%);transition:transform .25s;
+}
+.outfit-img-card:hover .img-label{transform:translateY(0);}
+.outfit-img-card .add-photo{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:8px;
+  font-size:13px;color:var(--mid);text-align:center;padding:12px;
+}
+.outfit-img-card .add-photo .icon{font-size:28px;opacity:.5;}
+
+/* DESC + CHIPS */
+.outfit-desc{font-size:14px;color:var(--mid);line-height:1.75;margin-bottom:12px;}
+.outfit-chips{display:flex;gap:7px;flex-wrap:wrap;}
+.oc-chip{
+  font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px;
+  border:1.5px solid;transition:all .2s;
+}
+.oc-chip:hover{transform:translateY(-2px);}
 
 /* COLOUR PALETTE */
-.palette-section{margin-bottom:32px;}
-.palette-title{font-size:13px;font-weight:600;letter-spacing:.06em;margin-bottom:16px;color:var(--dark);}
-.palette-swatches{display:flex;gap:12px;flex-wrap:wrap;}
+.palette-section{margin-bottom:40px;}
+.palette-title{font-size:13px;font-weight:600;letter-spacing:.05em;margin-bottom:14px;color:var(--dark);}
+.palette-swatches{display:flex;gap:10px;flex-wrap:wrap;}
 .swatch-item{text-align:center;}
-.swatch-circle{width:52px;height:52px;border-radius:50%;border:3px solid #fff;box-shadow:0 3px 12px rgba(0,0,0,.12);margin:0 auto 6px;transition:transform .2s;}
-.swatch-circle:hover{transform:scale(1.12);}
-.swatch-name{font-size:11px;color:var(--mid);}
-
-/* ATTIRE BY GENDER */
-.gender-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:24px;}
-.gender-card{border-radius:var(--radius);border:1.5px solid rgba(0,0,0,.07);overflow:hidden;transition:all .3s cubic-bezier(.16,1,.3,1);}
-.gender-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.09);border-color:transparent;}
-.gc-top{padding:24px;border-bottom:1px solid rgba(0,0,0,.06);}
-.gc-icon{font-size:32px;margin-bottom:12px;}
-.gc-title{font-size:16px;font-weight:600;margin-bottom:4px;}
-.gc-subtitle{font-size:13px;color:var(--mid);}
-.gc-body{padding:20px 24px;}
-.gc-body p{font-size:14px;color:var(--mid);line-height:1.8;}
-.gc-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px;}
-.gc-chip{font-size:12px;font-weight:500;padding:5px 12px;border-radius:20px;border:1.5px solid;transition:all .2s;}
-.gc-chip:hover{transform:translateY(-2px);}
+.swatch-circle{
+  width:48px;height:48px;border-radius:50%;
+  border:3px solid #fff;box-shadow:0 3px 12px rgba(0,0,0,.12);
+  margin:0 auto 5px;transition:transform .2s;cursor:none;
+}
+.swatch-circle:hover{transform:scale(1.15);}
+.swatch-name{font-size:10px;color:var(--mid);letter-spacing:.04em;}
 
 /* DO / DON'T */
-.do-dont-section{display:grid;grid-template-columns:1fr 1fr;gap:20px;margin-bottom:32px;}
-.do-card{padding:24px 28px;border-radius:var(--radius);background:var(--lime-l);border:1.5px solid rgba(107,191,58,.2);}
-.dont-card{padding:24px 28px;border-radius:var(--radius);background:var(--pink-l);border:1.5px solid rgba(224,92,138,.15);}
-.dd-title{font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
-.do-card .dd-title{color:var(--lime-d);}
-.dont-card .dd-title{color:var(--pink-d);}
-.dd-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;font-size:14px;line-height:1.65;}
+.do-dont-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:40px;}
+.do-box{padding:22px 26px;border-radius:var(--radius);background:var(--lime-l);border:1.5px solid rgba(107,191,58,.2);}
+.dont-box{padding:22px 26px;border-radius:var(--radius);background:var(--pink-l);border:1.5px solid rgba(224,92,138,.15);}
+.dd-title{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;margin-bottom:12px;display:flex;align-items:center;gap:7px;}
+.do-box .dd-title{color:var(--lime-d);}
+.dont-box .dd-title{color:var(--pink-d);}
+.dd-item{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;font-size:14px;line-height:1.65;}
 .dd-item:last-child{margin-bottom:0;}
-.do-card .dd-item{color:var(--lime-d);}
-.dont-card .dd-item{color:var(--pink-d);}
-.dd-item::before{flex-shrink:0;margin-top:1px;font-weight:700;}
-.do-card .dd-item::before{content:'✓';}
-.dont-card .dd-item::before{content:'✗';}
+.do-box .dd-item{color:var(--lime-d);}.do-box .dd-item::before{content:'✓';font-weight:700;flex-shrink:0;}
+.dont-box .dd-item{color:var(--pink-d);}.dont-box .dd-item::before{content:'✗';font-weight:700;flex-shrink:0;}
 
-/* INSPIRATION STRIP */
-.inspo-strip{padding:24px 28px;border-radius:var(--radius);background:var(--cream);border:1.5px solid rgba(0,0,0,.07);margin-bottom:24px;}
-.inspo-title{font-size:13px;font-weight:600;margin-bottom:10px;}
-.inspo-tags{display:flex;gap:8px;flex-wrap:wrap;}
-.inspo-tag{font-size:12px;font-weight:500;padding:5px 14px;border-radius:20px;background:#fff;border:1.5px solid rgba(0,0,0,.1);color:var(--dark);}
+/* TIPS */
+.tips-box{padding:24px 28px;border-radius:var(--radius);background:var(--cream);border:1.5px solid rgba(0,0,0,.07);margin-top:24px;}
+.tips-box h4{font-size:14px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;gap:8px;}
+.tip-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:8px;font-size:14px;color:var(--mid);line-height:1.6;}
+.tip-row:last-child{margin-bottom:0;}
+.tip-row::before{content:'→';color:var(--coral);font-weight:600;flex-shrink:0;margin-top:1px;}
 
-/* SECTION DIVIDER */
-.day-divider{height:1px;background:linear-gradient(to right,transparent,rgba(0,0,0,.1),transparent);margin:72px 0;}
-
-/* GENERAL RULES */
-.general-rules{margin-top:72px;}
+/* GENERAL */
+.general-section{padding:72px 0 0;}
 .rules-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:32px;}
 .rule-card{padding:22px;border-radius:var(--radius);background:var(--cream);border:1.5px solid rgba(0,0,0,.06);transition:all .3s;}
 .rule-card:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(0,0,0,.08);}
@@ -83,11 +141,17 @@
 .rule-title{font-size:14px;font-weight:600;margin-bottom:6px;}
 .rule-desc{font-size:13px;color:var(--mid);line-height:1.65;}
 
+.day-divider{height:1px;background:linear-gradient(to right,transparent,rgba(0,0,0,.1),transparent);margin:72px 0 0;}
+
 @media(max-width:900px){
   .page-body{padding:48px 20px;}
-  .gender-grid,.do-dont-section,.rules-grid{grid-template-columns:1fr;}
+  .outfit-cols{grid-template-columns:1fr;}
   .day-header{flex-direction:column;}
   .dh-time{text-align:left;}
+  .do-dont-row{grid-template-columns:1fr;}
+  .rules-grid{grid-template-columns:1fr 1fr;}
+  .outfit-images{grid-template-columns:1fr 1fr;}
+  .eb-time{display:none;}
 }
 </style>
 </head>
@@ -98,6 +162,7 @@
   <a href="index.html" class="nav-logo">S & S</a>
   <div class="nav-links">
     <a href="index.html">Home</a>
+    <a href="story.html">Our Story</a>
     <a href="highlights.html">Highlights</a>
     <a href="travel.html">Travel</a>
     <a href="attire.html" class="active">Attire</a>
@@ -107,19 +172,21 @@
 </nav>
 <div class="mobile-menu" id="mmenu">
   <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="story.html" onclick="closeMenu()">Our Story</a>
   <a href="highlights.html" onclick="closeMenu()">Highlights</a>
   <a href="travel.html" onclick="closeMenu()">Travel</a>
   <a href="attire.html" onclick="closeMenu()">Attire</a>
   <a href="index.html#rsvp" onclick="closeMenu()" style="color:var(--coral)">RSVP →</a>
 </div>
 
+<!-- HERO -->
 <div class="sub-hero" style="padding-top:var(--nav-h);background:linear-gradient(140deg,#2D0A1A 0%,#4A1530 50%,#8B2D50 100%);">
   <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(224,92,138,.1) 1px,transparent 1px);background-size:24px 24px;"></div>
   <div class="sub-hero-content">
     <div class="sub-breadcrumb"><a href="index.html">Home</a><span>/</span><span>Attire Guide</span></div>
-    <div class="sub-eyebrow">Dress code</div>
+    <div class="sub-eyebrow">Dress code · 24 & 25 November 2026</div>
     <h1 class="sub-title">What to <em>Wear</em></h1>
-    <p class="sub-desc">Your complete guide to dressing for both days — colours, outfits, do's and don'ts, and everything in between.</p>
+    <p class="sub-desc">Your complete outfit guide for both days — colour palettes, example outfits, do's and don'ts, and everything in between.</p>
     <div class="sub-hero-ctas">
       <a href="#day1" class="btn-primary">Day 1 — Haldi & Sangeet</a>
       <a href="#day2" class="btn-outline-white">Day 2 — Wedding</a>
@@ -130,22 +197,23 @@
 <div class="page-body">
 <div class="page-inner">
 
-  <!-- DAY 1 -->
+  <!-- ═══════════════════════════════
+       DAY 1
+  ════════════════════════════════ -->
   <div id="day1" class="day-anchor"></div>
   <div class="day-section">
+
     <div class="day-header dh-day1 reveal">
       <div>
-        <div class="dh-badge">Day 1 · Monday, 24 November</div>
+        <div class="dh-badge">Day 1 · Monday, 24 November 2026</div>
         <div class="dh-title">Haldi & <em>Sangeet</em></div>
       </div>
-      <div class="dh-time">
-        <div class="t">4pm – 12am</div>
-        <div class="tl">Festive & colourful</div>
-      </div>
+      <div class="dh-time"><div class="t">4:00 PM – 12:00 AM</div><div class="tl">Festive & colourful</div></div>
     </div>
 
+    <!-- PALETTE DAY 1 -->
     <div class="palette-section reveal">
-      <div class="palette-title">Colour palette — Day 1</div>
+      <div class="palette-title">Day 1 colour palette</div>
       <div class="palette-swatches">
         <div class="swatch-item"><div class="swatch-circle" style="background:#F5A623"></div><div class="swatch-name">Turmeric</div></div>
         <div class="swatch-item"><div class="swatch-circle" style="background:#E8563A"></div><div class="swatch-name">Coral</div></div>
@@ -154,90 +222,185 @@
         <div class="swatch-item"><div class="swatch-circle" style="background:#2DB9B9"></div><div class="swatch-name">Teal</div></div>
         <div class="swatch-item"><div class="swatch-circle" style="background:#F0E68C"></div><div class="swatch-name">Lemon</div></div>
         <div class="swatch-item"><div class="swatch-circle" style="background:#FFF8DC"></div><div class="swatch-name">Ivory</div></div>
+        <div class="swatch-item"><div class="swatch-circle" style="background:#FF8C42"></div><div class="swatch-name">Orange</div></div>
       </div>
     </div>
 
-    <div class="gender-grid">
-      <div class="gender-card reveal d1">
-        <div class="gc-top">
-          <div class="gc-icon">👗</div>
-          <div class="gc-title">For women</div>
-          <div class="gc-subtitle">Haldi + Sangeet attire</div>
+    <!-- HALDI EVENT -->
+    <div class="event-block reveal">
+      <div class="event-block-header">
+        <div class="eb-icon" style="background:var(--yellow-l)">🌿</div>
+        <div>
+          <div class="eb-tag" style="color:var(--yellow-d)">Event 1</div>
+          <div class="eb-title">Haldi Ceremony</div>
         </div>
-        <div class="gc-body">
-          <p><strong>Haldi:</strong> Light cotton salwar, kurta, or any outfit you don't mind getting turmeric on. Bright yellows, oranges, and whites work beautifully.<br><br><strong>Sangeet:</strong> Lehenga, saree, anarkali, or sharara in festive colours. This is the night to go all out!</p>
-          <div class="gc-chips">
-            <span class="gc-chip" style="border-color:var(--yellow-d);color:var(--yellow-d)">Salwar</span>
-            <span class="gc-chip" style="border-color:var(--coral);color:var(--coral)">Lehenga</span>
-            <span class="gc-chip" style="border-color:var(--pink-d);color:var(--pink-d)">Anarkali</span>
-            <span class="gc-chip" style="border-color:var(--lime-d);color:var(--lime-d)">Saree</span>
+        <div class="eb-time"><div class="t">4:00 PM</div><div class="tl">24 November</div></div>
+      </div>
+      <div class="outfit-cols">
+        <!-- WOMEN -->
+        <div class="outfit-col">
+          <div class="oc-label" style="color:var(--pink-d)">For women</div>
+          <div class="outfit-images">
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/2b/7e/82/2b7e82b7f6a1fde0f06a5e19f6c3e6f2.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Yellow salwar haldi outfit">
+              <div class="img-label">Yellow salwar</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/6c/a1/4b/6ca14b6d2f8e9d1a3c7b5e8f2a9d4c1e.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Cotton kurta haldi">
+              <div class="img-label">Cotton kurta</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card" style="background:linear-gradient(135deg,var(--yellow-l),#fff)">
+              <div class="add-photo" style="display:flex"><div class="icon">➕</div><span>Add your inspo</span></div>
+            </div>
+          </div>
+          <p class="outfit-desc">Light cotton salwar, kurta, or any outfit you don't mind getting turmeric on! Yellows, oranges, and whites look beautiful and photograph wonderfully.</p>
+          <div class="outfit-chips">
+            <span class="oc-chip" style="border-color:var(--yellow-d);color:var(--yellow-d)">Yellow salwar</span>
+            <span class="oc-chip" style="border-color:var(--coral);color:var(--coral)">Orange kurta</span>
+            <span class="oc-chip" style="border-color:var(--lime-d);color:var(--lime-d)">White cotton</span>
+          </div>
+        </div>
+        <!-- MEN -->
+        <div class="outfit-col">
+          <div class="oc-label" style="color:var(--coral)">For men</div>
+          <div class="outfit-images">
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/a9/3c/6b/a93c6b8e2f1d4a7c9e5b3f8a2c1d9e6b.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Yellow kurta pyjama men haldi">
+              <div class="img-label">Yellow kurta</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/f3/2a/8c/f32a8c4b6e9d1f7a3c5b8e2f4d9a6c3e.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Cotton kurta men casual">
+              <div class="img-label">Cotton kurta</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card" style="background:linear-gradient(135deg,var(--coral-l),#fff)">
+              <div class="add-photo" style="display:flex"><div class="icon">➕</div><span>Add your inspo</span></div>
+            </div>
+          </div>
+          <p class="outfit-desc">Light cotton kurta or t-shirt in white, yellow, or any bright colour. Keep it simple — it will get messy and that's half the fun!</p>
+          <div class="outfit-chips">
+            <span class="oc-chip" style="border-color:var(--yellow-d);color:var(--yellow-d)">Yellow kurta</span>
+            <span class="oc-chip" style="border-color:var(--coral);color:var(--coral)">Cotton t-shirt</span>
+            <span class="oc-chip" style="border-color:var(--lime-d);color:var(--lime-d)">White kurta</span>
           </div>
         </div>
       </div>
-      <div class="gender-card reveal d2">
-        <div class="gc-top">
-          <div class="gc-icon">👘</div>
-          <div class="gc-title">For men</div>
-          <div class="gc-subtitle">Haldi + Sangeet attire</div>
+    </div>
+
+    <!-- SANGEET EVENT -->
+    <div class="event-block reveal">
+      <div class="event-block-header">
+        <div class="eb-icon" style="background:var(--coral-l)">🎶</div>
+        <div>
+          <div class="eb-tag" style="color:var(--coral)">Event 2</div>
+          <div class="eb-title">Sangeet Night</div>
         </div>
-        <div class="gc-body">
-          <p><strong>Haldi:</strong> Light cotton kurta or t-shirt in white or yellow. It will get messy — keep it simple!<br><br><strong>Sangeet:</strong> Kurta-pyjama, sherwani, or Indo-Western in festive colours. Dress to dance!</p>
-          <div class="gc-chips">
-            <span class="gc-chip" style="border-color:var(--yellow-d);color:var(--yellow-d)">Kurta</span>
-            <span class="gc-chip" style="border-color:var(--purple-d);color:var(--purple-d)">Sherwani</span>
-            <span class="gc-chip" style="border-color:var(--teal);color:var(--teal)">Indo-Western</span>
+        <div class="eb-time"><div class="t">Evening</div><div class="tl">Until midnight</div></div>
+      </div>
+      <div class="outfit-cols">
+        <!-- WOMEN -->
+        <div class="outfit-col">
+          <div class="oc-label" style="color:var(--pink-d)">For women</div>
+          <div class="outfit-images">
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/7d/4e/9f/7d4e9f8a2c6b3e1d5f9a4c7b8e2f6d3a.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Colourful lehenga sangeet">
+              <div class="img-label">Colourful lehenga</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/3a/8c/2f/3a8c2f6b9d4e1a7c5f8b3e6d9a2c4f8b.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Anarkali sangeet outfit">
+              <div class="img-label">Anarkali suit</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card" style="background:linear-gradient(135deg,var(--pink-l),#fff)">
+              <div class="add-photo" style="display:flex"><div class="icon">➕</div><span>Add your inspo</span></div>
+            </div>
+          </div>
+          <p class="outfit-desc">This is your night to go all out! Lehenga, saree, anarkali, or sharara in the most festive colours you own. The bolder the better.</p>
+          <div class="outfit-chips">
+            <span class="oc-chip" style="border-color:var(--pink-d);color:var(--pink-d)">Lehenga</span>
+            <span class="oc-chip" style="border-color:var(--coral);color:var(--coral)">Anarkali</span>
+            <span class="oc-chip" style="border-color:var(--purple-d);color:var(--purple-d)">Sharara</span>
+            <span class="oc-chip" style="border-color:var(--teal);color:var(--teal)">Saree</span>
+          </div>
+        </div>
+        <!-- MEN -->
+        <div class="outfit-col">
+          <div class="oc-label" style="color:var(--coral)">For men</div>
+          <div class="outfit-images">
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/8e/1c/4a/8e1c4a7b3f9d2e6c5a8b4f7d2e9c1a6b.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Sherwani men sangeet indo western">
+              <div class="img-label">Indo-western</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/5c/9e/2b/5c9e2b8a4f1d7c3e6b9a2f5d8c1e4b7a.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Kurta pyjama festive men">
+              <div class="img-label">Festive kurta</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card" style="background:linear-gradient(135deg,var(--purple-l),#fff)">
+              <div class="add-photo" style="display:flex"><div class="icon">➕</div><span>Add your inspo</span></div>
+            </div>
+          </div>
+          <p class="outfit-desc">Kurta-pyjama, sherwani, or Indo-Western in festive colours. Dress to dance — you'll be on your feet all night!</p>
+          <div class="outfit-chips">
+            <span class="oc-chip" style="border-color:var(--purple-d);color:var(--purple-d)">Sherwani</span>
+            <span class="oc-chip" style="border-color:var(--coral);color:var(--coral)">Kurta-pyjama</span>
+            <span class="oc-chip" style="border-color:var(--teal);color:var(--teal)">Indo-Western</span>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="inspo-strip reveal">
-      <div class="inspo-title">Outfit inspiration keywords</div>
-      <div class="inspo-tags">
-        <span class="inspo-tag">Yellow lehenga</span><span class="inspo-tag">Floral anarkali</span>
-        <span class="inspo-tag">Orange saree</span><span class="inspo-tag">Printed kurta</span>
-        <span class="inspo-tag">Pink sharara</span><span class="inspo-tag">White cotton kurta</span>
-        <span class="inspo-tag">Colourful dupatta</span><span class="inspo-tag">Mirror work blouse</span>
-      </div>
+    <!-- TIPS DAY 1 -->
+    <div class="tips-box reveal">
+      <h4>💡 Tips for Day 1</h4>
+      <div class="tip-row">Arrive by 3:45 PM for Haldi — it starts promptly at 4:00 PM.</div>
+      <div class="tip-row">Wear clothes you don't mind getting turmeric on for Haldi. Bring a change of outfit for Sangeet.</div>
+      <div class="tip-row">Leave valuable jewellery at the hotel for the Haldi portion — things can get messy!</div>
+      <div class="tip-row">Wear comfortable footwear you can dance in for Sangeet night.</div>
     </div>
 
-    <div class="do-dont-section reveal">
-      <div class="do-card">
-        <div class="dd-title">✓ Wear for Day 1</div>
-        <div class="dd-item">Yellows, oranges, pinks — the brighter the better for Haldi</div>
-        <div class="dd-item">Old or inexpensive clothes for the Haldi ceremony specifically</div>
-        <div class="dd-item">Comfortable footwear — you'll be dancing at Sangeet</div>
-        <div class="dd-item">Festive and fun for Sangeet — bring your personality!</div>
-        <div class="dd-item">Bring a change of outfit if attending both Haldi and Sangeet</div>
-      </div>
-      <div class="dont-card">
-        <div class="dd-title">✗ Please avoid for Day 1</div>
-        <div class="dd-item">White or very light colours (turmeric will stain permanently)</div>
-        <div class="dd-item">Expensive or dry-clean-only outfits for the Haldi portion</div>
-        <div class="dd-item">Very formal or heavy embroidery for Haldi — save it for Day 2</div>
-        <div class="dd-item">Black (traditionally avoided at Indian celebrations)</div>
-      </div>
-    </div>
-  </div>
+  </div><!-- /day-section -->
 
   <div class="day-divider"></div>
 
-  <!-- DAY 2 -->
-  <div id="day2" class="day-anchor"></div>
-  <div class="day-section">
+  <!-- ═══════════════════════════════
+       DAY 2
+  ════════════════════════════════ -->
+  <div id="day2" class="day-anchor" style="top:calc(-1 * var(--nav-h) - 40px)"></div>
+  <div class="day-section" style="margin-top:72px;">
+
     <div class="day-header dh-day2 reveal">
       <div>
-        <div class="dh-badge">Day 2 · Tuesday, 25 November</div>
+        <div class="dh-badge">Day 2 · Tuesday, 25 November 2026</div>
         <div class="dh-title">Wedding & <em>Reception</em></div>
       </div>
-      <div class="dh-time">
-        <div class="t">9am – 5pm</div>
-        <div class="tl">Formal & festive</div>
-      </div>
+      <div class="dh-time"><div class="t">9:00 AM – 5:00 PM</div><div class="tl">Formal & festive</div></div>
     </div>
 
+    <!-- PALETTE DAY 2 -->
     <div class="palette-section reveal">
-      <div class="palette-title">Colour palette — Day 2</div>
+      <div class="palette-title">Day 2 colour palette</div>
       <div class="palette-swatches">
         <div class="swatch-item"><div class="swatch-circle" style="background:#E05C8A"></div><div class="swatch-name">Deep pink</div></div>
         <div class="swatch-item"><div class="swatch-circle" style="background:#8B7FE8"></div><div class="swatch-name">Purple</div></div>
@@ -246,81 +409,259 @@
         <div class="swatch-item"><div class="swatch-circle" style="background:#6BBF3A"></div><div class="swatch-name">Emerald</div></div>
         <div class="swatch-item"><div class="swatch-circle" style="background:#BA7517"></div><div class="swatch-name">Gold</div></div>
         <div class="swatch-item"><div class="swatch-circle" style="background:#1A5276"></div><div class="swatch-name">Navy</div></div>
+        <div class="swatch-item"><div class="swatch-circle" style="background:#8B0000"></div><div class="swatch-name">Deep red</div></div>
       </div>
     </div>
 
-    <div class="gender-grid">
-      <div class="gender-card reveal d1">
-        <div class="gc-top">
-          <div class="gc-icon">👗</div>
-          <div class="gc-title">For women</div>
-          <div class="gc-subtitle">Wedding & reception attire</div>
+    <!-- VIDHI EVENT -->
+    <div class="event-block reveal">
+      <div class="event-block-header">
+        <div class="eb-icon" style="background:var(--lime-l)">🙏</div>
+        <div>
+          <div class="eb-tag" style="color:var(--lime-d)">Event 3</div>
+          <div class="eb-title">Vidhi — Sacred Rituals</div>
         </div>
-        <div class="gc-body">
-          <p>The main day calls for your most beautiful outfit. Traditional Indian formal wear is the star of the show, but Western formal is equally welcome.<br><br>Silk sarees, heavy lehengas, formal anarkali suits, or a chic formal dress — all are perfect.</p>
-          <div class="gc-chips">
-            <span class="gc-chip" style="border-color:var(--coral);color:var(--coral)">Silk saree</span>
-            <span class="gc-chip" style="border-color:var(--purple-d);color:var(--purple-d)">Heavy lehenga</span>
-            <span class="gc-chip" style="border-color:var(--pink-d);color:var(--pink-d)">Formal anarkali</span>
-            <span class="gc-chip" style="border-color:var(--teal);color:var(--teal)">Western formal</span>
+        <div class="eb-time"><div class="t">9:00 AM</div><div class="tl">Arrive by 8:45</div></div>
+      </div>
+      <div class="outfit-cols">
+        <div class="outfit-col">
+          <div class="oc-label" style="color:var(--pink-d)">For women</div>
+          <div class="outfit-images">
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/4b/7a/2e/4b7a2e9c1f6d3b8a5e2c9f4b7a1e3d6c.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Salwar suit traditional vidhi">
+              <div class="img-label">Salwar suit</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/9d/3f/6c/9d3f6c2b8e1a4d7f5c9b2e6a1d4f8c3b.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Traditional saree vidhi">
+              <div class="img-label">Traditional saree</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card" style="background:linear-gradient(135deg,var(--lime-l),#fff)">
+              <div class="add-photo" style="display:flex"><div class="icon">➕</div><span>Add your inspo</span></div>
+            </div>
+          </div>
+          <p class="outfit-desc">Traditional Indian attire warmly welcomed. Saree or salwar suit in auspicious colours like green, yellow, or red. Comfortable footwear as you'll be seated for rituals.</p>
+          <div class="outfit-chips">
+            <span class="oc-chip" style="border-color:var(--lime-d);color:var(--lime-d)">Salwar suit</span>
+            <span class="oc-chip" style="border-color:var(--coral);color:var(--coral)">Saree</span>
+            <span class="oc-chip" style="border-color:var(--yellow-d);color:var(--yellow-d)">Anarkali</span>
+          </div>
+        </div>
+        <div class="outfit-col">
+          <div class="oc-label" style="color:var(--coral)">For men</div>
+          <div class="outfit-images">
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/2f/8c/4e/2f8c4e1b7a9d3f6c2b8e5a1d4f9c3b7e.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Traditional kurta men vidhi">
+              <div class="img-label">Formal kurta</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/6a/1d/8b/6a1d8b4e9c2f5a3d7e1b6c4f9a2d5e8c.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Dhoti kurta traditional">
+              <div class="img-label">Dhoti kurta</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card" style="background:linear-gradient(135deg,var(--lime-l),#fff)">
+              <div class="add-photo" style="display:flex"><div class="icon">➕</div><span>Add your inspo</span></div>
+            </div>
+          </div>
+          <p class="outfit-desc">Traditional Indian attire for the rituals. Kurta-pyjama, dhoti-kurta, or formal kurta in auspicious colours. Sherwani is also perfect for the full day.</p>
+          <div class="outfit-chips">
+            <span class="oc-chip" style="border-color:var(--lime-d);color:var(--lime-d)">Kurta-pyjama</span>
+            <span class="oc-chip" style="border-color:var(--yellow-d);color:var(--yellow-d)">Dhoti kurta</span>
           </div>
         </div>
       </div>
-      <div class="gender-card reveal d2">
-        <div class="gc-top">
-          <div class="gc-icon">🤵</div>
-          <div class="gc-title">For men</div>
-          <div class="gc-subtitle">Wedding & reception attire</div>
+    </div>
+
+    <!-- WEDDING CEREMONY -->
+    <div class="event-block reveal">
+      <div class="event-block-header">
+        <div class="eb-icon" style="background:var(--coral-l)">💍</div>
+        <div>
+          <div class="eb-tag" style="color:var(--coral)">Event 4</div>
+          <div class="eb-title">The Wedding Ceremony</div>
         </div>
-        <div class="gc-body">
-          <p>Sherwani is the traditional choice and looks stunning. A formal suit or blazer with trousers is equally appropriate and appreciated.<br><br>For the reception, semi-formal is also welcome — smart trousers with a formal kurta or blazer works perfectly.</p>
-          <div class="gc-chips">
-            <span class="gc-chip" style="border-color:var(--yellow-d);color:var(--yellow-d)">Sherwani</span>
-            <span class="gc-chip" style="border-color:var(--dark);color:var(--dark)">Formal suit</span>
-            <span class="gc-chip" style="border-color:var(--purple-d);color:var(--purple-d)">Blazer + kurta</span>
+        <div class="eb-time"><div class="t">12:15 PM</div><div class="tl">Be seated by noon</div></div>
+      </div>
+      <div class="outfit-cols">
+        <div class="outfit-col">
+          <div class="oc-label" style="color:var(--pink-d)">For women</div>
+          <div class="outfit-images">
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/e8/2a/7f/e82a7f4c1b9d6e3a8c5f2b7d4e9a1c6f.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Silk saree wedding women">
+              <div class="img-label">Silk saree</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/1c/6f/3a/1c6f3a8e2d9b4c7f1a5e8b3d6f9c2a5e.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Heavy lehenga wedding ceremony">
+              <div class="img-label">Heavy lehenga</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card" style="background:linear-gradient(135deg,var(--coral-l),#fff)">
+              <div class="add-photo" style="display:flex"><div class="icon">➕</div><span>Add your inspo</span></div>
+            </div>
+          </div>
+          <p class="outfit-desc">Your most beautiful outfit. Silk saree, heavy lehenga, or formal anarkali in rich jewel tones. Statement jewellery strongly encouraged — go all out!</p>
+          <div class="outfit-chips">
+            <span class="oc-chip" style="border-color:var(--coral);color:var(--coral)">Silk saree</span>
+            <span class="oc-chip" style="border-color:var(--purple-d);color:var(--purple-d)">Heavy lehenga</span>
+            <span class="oc-chip" style="border-color:var(--pink-d);color:var(--pink-d)">Anarkali</span>
+          </div>
+        </div>
+        <div class="outfit-col">
+          <div class="oc-label" style="color:var(--coral)">For men</div>
+          <div class="outfit-images">
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/7b/4d/9e/7b4d9e2c1f6a3d8b5e2c9f4b7a1e3d6a.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Sherwani wedding groom guest">
+              <div class="img-label">Sherwani</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/3e/8a/1c/3e8a1c6f4b9d2e7a5c1f8b4e9d2a6c3f.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Formal suit men wedding">
+              <div class="img-label">Formal suit</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card" style="background:linear-gradient(135deg,var(--coral-l),#fff)">
+              <div class="add-photo" style="display:flex"><div class="icon">➕</div><span>Add your inspo</span></div>
+            </div>
+          </div>
+          <p class="outfit-desc">Sherwani is the star of the show and looks incredible in photos. Formal suit or blazer with trousers is equally appreciated. Dress to impress!</p>
+          <div class="outfit-chips">
+            <span class="oc-chip" style="border-color:var(--yellow-d);color:var(--yellow-d)">Sherwani</span>
+            <span class="oc-chip" style="border-color:var(--dark);color:var(--dark)">Formal suit</span>
+            <span class="oc-chip" style="border-color:var(--purple-d);color:var(--purple-d)">Blazer + kurta</span>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="inspo-strip reveal">
-      <div class="inspo-title">Outfit inspiration keywords</div>
-      <div class="inspo-tags">
-        <span class="inspo-tag">Silk Banarasi saree</span><span class="inspo-tag">Embroidered lehenga</span>
-        <span class="inspo-tag">Teal sherwani</span><span class="inspo-tag">Purple anarkali</span>
-        <span class="inspo-tag">Navy bandhgala suit</span><span class="inspo-tag">Gold tissue saree</span>
-        <span class="inspo-tag">Pink georgette</span><span class="inspo-tag">Jewel-toned formal</span>
+    <!-- RECEPTION -->
+    <div class="event-block reveal">
+      <div class="event-block-header">
+        <div class="eb-icon" style="background:var(--purple-l)">🥂</div>
+        <div>
+          <div class="eb-tag" style="color:var(--purple-d)">Event 5</div>
+          <div class="eb-title">Wedding Reception</div>
+        </div>
+        <div class="eb-time"><div class="t">2:00 PM</div><div class="tl">Until 5pm</div></div>
+      </div>
+      <div class="outfit-cols">
+        <div class="outfit-col">
+          <div class="oc-label" style="color:var(--pink-d)">For women</div>
+          <div class="outfit-images">
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/5a/2c/8f/5a2c8f1b4e7d3a9c6f2b8e5a1d4f9c2b.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Anarkali reception women">
+              <div class="img-label">Anarkali suit</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/9f/3b/6e/9f3b6e2a8d1c5f4b9e2a7d4c1f8b5e3a.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Western formal dress reception">
+              <div class="img-label">Western formal</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card" style="background:linear-gradient(135deg,var(--purple-l),#fff)">
+              <div class="add-photo" style="display:flex"><div class="icon">➕</div><span>Add your inspo</span></div>
+            </div>
+          </div>
+          <p class="outfit-desc">Many guests change into something a bit lighter for the reception. Anarkali, saree, or western formal all work beautifully. Keep the festive colours going!</p>
+          <div class="outfit-chips">
+            <span class="oc-chip" style="border-color:var(--purple-d);color:var(--purple-d)">Anarkali</span>
+            <span class="oc-chip" style="border-color:var(--coral);color:var(--coral)">Saree</span>
+            <span class="oc-chip" style="border-color:var(--teal);color:var(--teal)">Western formal</span>
+          </div>
+        </div>
+        <div class="outfit-col">
+          <div class="oc-label" style="color:var(--coral)">For men</div>
+          <div class="outfit-images">
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/2d/7f/4b/2d7f4b9e1c6a3f8b5d2e9c4a7f1b6d3e.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Blazer kurta men reception">
+              <div class="img-label">Blazer + kurta</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card">
+              <img src="https://i.pinimg.com/736x/8c/1e/5a/8c1e5a3d9f2b7c4e1a8f5d2b9e4c7a1f.jpg"
+                   onerror="this.style.display='none';this.parentElement.querySelector('.add-photo').style.display='flex';"
+                   alt="Smart trousers men reception casual formal">
+              <div class="img-label">Smart trousers</div>
+              <div class="add-photo" style="display:none"><div class="icon">📸</div><span>Add photo</span></div>
+            </div>
+            <div class="outfit-img-card" style="background:linear-gradient(135deg,var(--purple-l),#fff)">
+              <div class="add-photo" style="display:flex"><div class="icon">➕</div><span>Add your inspo</span></div>
+            </div>
+          </div>
+          <p class="outfit-desc">Semi-formal to formal. Blazer with kurta, a formal suit, or keep the sherwani going. Smart trousers with a formal kurta is perfectly appropriate.</p>
+          <div class="outfit-chips">
+            <span class="oc-chip" style="border-color:var(--purple-d);color:var(--purple-d)">Blazer + kurta</span>
+            <span class="oc-chip" style="border-color:var(--dark);color:var(--dark)">Formal suit</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="do-dont-section reveal">
-      <div class="do-card">
-        <div class="dd-title">✓ Wear for Day 2</div>
-        <div class="dd-item">Bright, festive, jewel-toned colours — it's a celebration!</div>
-        <div class="dd-item">Traditional Indian formal wear — saree, lehenga, sherwani</div>
-        <div class="dd-item">Western formals — suits, blazers, formal dresses</div>
-        <div class="dd-item">Statement jewellery and accessories — go for it!</div>
-        <div class="dd-item">Comfortable but formal footwear — you'll be standing for photos</div>
+    <!-- TIPS DAY 2 -->
+    <div class="tips-box reveal">
+      <h4>💡 Tips for Day 2</h4>
+      <div class="tip-row">Arrive by 8:45 AM for Vidhi — rituals begin promptly at 9:00 AM.</div>
+      <div class="tip-row">You'll be asked to remove footwear in ceremonial areas — wear slip-on sandals or easy footwear.</div>
+      <div class="tip-row">Be fully seated for the wedding ceremony by 12:00 PM.</div>
+      <div class="tip-row">Lots of photos happen at the ceremony and reception — dress for the camera!</div>
+      <div class="tip-row">Pre-book your return cab — the reception ends at 5:00 PM and cabs fill up fast.</div>
+    </div>
+
+    <!-- DO / DON'T -->
+    <div class="do-dont-row reveal">
+      <div class="do-box">
+        <div class="dd-title">Wear across both days</div>
+        <div class="dd-item">Vibrant, jewel-toned, and festive colours — the brighter the better</div>
+        <div class="dd-item">Traditional Indian formal wear — saree, lehenga, sherwani, anarkali</div>
+        <div class="dd-item">Statement jewellery and accessories on Day 2</div>
+        <div class="dd-item">Comfortable footwear you can dance in for Sangeet</div>
+        <div class="dd-item">Slip-on sandals or easy footwear for ceremonial areas on Day 2</div>
       </div>
-      <div class="dont-card">
-        <div class="dd-title">✗ Please avoid for Day 2</div>
+      <div class="dont-box">
+        <div class="dd-title">Please avoid</div>
         <div class="dd-item">White or ivory dresses — reserved for the bride</div>
-        <div class="dd-item">Very casual clothing — jeans, t-shirts, sneakers</div>
-        <div class="dd-item">Overly revealing outfits — this is a traditional ceremony</div>
-        <div class="dd-item">Colours that are too similar to the bridal palette (deep red/maroon)</div>
+        <div class="dd-item">Black on Day 1 — traditionally avoided at Indian celebrations</div>
+        <div class="dd-item">Expensive clothes for the Haldi — turmeric will stain permanently</div>
+        <div class="dd-item">Very casual wear — jeans, t-shirts, sneakers on Day 2</div>
+        <div class="dd-item">Colours too similar to deep bridal red/maroon on Day 2</div>
       </div>
     </div>
-  </div>
 
-  <!-- GENERAL RULES -->
-  <div class="general-rules reveal">
-    <div class="section-label sl-pink">General guidance</div>
-    <h2 class="section-title" style="margin-bottom:32px">Good to <em>know</em></h2>
+  </div><!-- /day2 -->
+
+  <!-- GENERAL SECTION -->
+  <div class="general-section reveal">
+    <div class="section-label sl-pink">Good to know</div>
+    <h2 class="section-title" style="margin-bottom:32px">General <em>guidance</em></h2>
     <div class="rules-grid">
       <div class="rule-card">
         <div class="rule-icon">👟</div>
         <div class="rule-title">Footwear tip</div>
-        <div class="rule-desc">You'll be asked to remove shoes when entering certain ceremonial areas. Slip-on footwear or sandals make this much easier.</div>
+        <div class="rule-desc">You'll remove shoes when entering ceremonial areas on Day 2. Slip-on sandals or heels with ankle straps make this much easier.</div>
       </div>
       <div class="rule-card">
         <div class="rule-icon">🌤️</div>
@@ -330,7 +671,7 @@
       <div class="rule-card">
         <div class="rule-icon">📸</div>
         <div class="rule-title">Dress for photos</div>
-        <div class="rule-desc">There will be lots of photos! Wear colours that photograph beautifully — jewel tones, pastels, and bright colours all look stunning in Indian wedding photography.</div>
+        <div class="rule-desc">There will be lots of photos! Jewel tones, pastels, and bright colours all look stunning in Indian wedding photography.</div>
       </div>
     </div>
   </div>
@@ -339,8 +680,11 @@
   <div style="margin-top:72px;padding:48px;border-radius:24px;background:linear-gradient(135deg,var(--pink-l),#fff);border:1.5px solid rgba(224,92,138,.15);text-align:center;" class="reveal">
     <p style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--pink-d);margin-bottom:14px">Almost time to celebrate</p>
     <h2 style="font-family:'Cormorant',serif;font-size:48px;font-weight:300;margin-bottom:12px">Ready to <em style="font-style:italic;color:var(--coral)">join us?</em></h2>
-    <p style="font-size:16px;color:var(--mid);margin-bottom:32px">Send your RSVP by 1 October 2025</p>
-    <a href="index.html#rsvp" class="btn-primary">Send your RSVP →</a>
+    <p style="font-size:16px;color:var(--mid);margin-bottom:32px">Send your RSVP by 1 October 2026</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="index.html#rsvp" class="btn-primary">Send your RSVP →</a>
+      <a href="highlights.html" class="btn-outline-dark">View celebrations →</a>
+    </div>
   </div>
 
 </div>
@@ -348,10 +692,10 @@
 
 <footer class="main-footer">
   <div class="footer-logo">Sanket & Sneha</div>
-  <div class="footer-meta">24–25 November 2025 · Marigold Banquets, Pune</div>
+  <div class="footer-meta">24–25 November 2026 · Marigold Banquets, Pune</div>
   <div class="footer-links">
-    <a href="index.html">Home</a><a href="highlights.html">Highlights</a>
-    <a href="travel.html">Travel</a><a href="index.html#rsvp">RSVP</a>
+    <a href="index.html">Home</a><a href="story.html">Our Story</a>
+    <a href="highlights.html">Highlights</a><a href="travel.html">Travel</a><a href="index.html#rsvp">RSVP</a>
   </div>
 </footer>
 <script src="shared.js"></script>
