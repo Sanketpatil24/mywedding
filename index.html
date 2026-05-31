@@ -12,7 +12,7 @@
 /* HERO */
 #hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative;overflow:hidden;}
 .hero-canvas{position:absolute;inset:0;z-index:0;}
-.hero-photo{position:absolute;inset:0;z-index:0;background:url('photo-together.jpg') center 20% / cover no-repeat;}
+.hero-photo{position:absolute;inset:0;z-index:0;background:url('photo-auto.jpg') center 25% / cover no-repeat;}
 .hero-overlay{position:absolute;inset:0;z-index:1;background:linear-gradient(160deg,rgba(26,12,4,.78) 0%,rgba(45,25,10,.72) 40%,rgba(80,30,10,.62) 80%,rgba(26,12,4,.75) 100%);}
 .hero-content{position:relative;z-index:2;padding:0 24px;}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:10px;font-size:11px;font-weight:500;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.55);margin-bottom:24px;opacity:0;animation:fadeUp .8s .3s forwards;}
@@ -209,6 +209,7 @@
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="story.html">Our Story</a>
+    <a href="people.html">Our People</a>
     <a href="#features">Highlights</a>
     <a href="#schedule">Schedule</a>
     <a href="#travel">Travel</a>
@@ -220,6 +221,7 @@
 <div class="mobile-menu" id="mmenu">
   <a href="#about" onclick="closeMenu()">About</a>
   <a href="story.html" onclick="closeMenu()">Our Story</a>
+  <a href="people.html" onclick="closeMenu()">Our People</a>
   <a href="#features" onclick="closeMenu()">Highlights</a>
   <a href="#schedule" onclick="closeMenu()">Schedule</a>
   <a href="#travel" onclick="closeMenu()">Travel</a>
@@ -264,7 +266,7 @@
     <div class="about-grid">
       <div class="reveal-left">
         <div class="about-frame">
-          <img src="photo-together.jpg" alt="Sanket and Sneha">
+          <img src="photo-auto.jpg" alt="Sanket and Sneha" style="object-position:center 25%">
           <div class="about-label"><h3>Sanket & Sneha</h3><p>November 2026 · Pune</p></div>
         </div>
         <div class="about-float"><span class="big">2026</span>The year it all begins</div>
@@ -487,7 +489,7 @@
   <div class="footer-logo">Sanket & Sneha</div>
   <div class="footer-meta">24–25 November 2026 · Marigold Banquets, Pune</div>
   <div class="footer-links">
-    <a href="story.html">Our Story</a><a href="highlights.html">Highlights</a>
+    <a href="story.html">Our Story</a><a href="people.html">Our People</a><a href="highlights.html">Highlights</a>
     <a href="travel.html">Travel</a><a href="attire.html">Attire</a><a href="#rsvp">RSVP</a>
   </div>
 </footer>

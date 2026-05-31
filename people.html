@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Our People — Sanket & Sneha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="shared.css">
+<style>
+.page-body{background:#fff;}
+.page-inner{max-width:1080px;margin:0 auto;padding:0 48px 96px;}
+
+/* GROUP SECTION */
+.group-section{padding-top:80px;border-top:1px solid rgba(0,0,0,.07);margin-top:0;}
+.group-section:first-of-type{border-top:none;padding-top:72px;}
+.group-anchor{display:block;position:relative;top:calc(-1 * var(--nav-h) - 20px);}
+
+.group-header{display:flex;align-items:flex-end;justify-content:space-between;gap:24px;flex-wrap:wrap;margin-bottom:48px;}
+.gh-left{}
+.gh-badge{
+  display:inline-flex;align-items:center;gap:8px;
+  font-size:10px;font-weight:700;letter-spacing:.18em;text-transform:uppercase;
+  padding:5px 14px;border-radius:20px;margin-bottom:12px;
+}
+.badge-sanket-friends{background:var(--coral-l);color:var(--coral);}
+.badge-sneha-friends{background:var(--pink-l);color:var(--pink-d);}
+.badge-sanket-fam{background:var(--yellow-l);color:var(--yellow-d);}
+.badge-sneha-fam{background:var(--purple-l);color:var(--purple-d);}
+.badge-lime{background:var(--lime-l);color:var(--lime-d);}
+
+.group-title{font-family:'Cormorant',serif;font-size:clamp(34px,4.5vw,58px);font-weight:300;line-height:1.1;}
+.group-title em{font-style:italic;}
+.group-desc{font-size:15px;color:var(--mid);margin-top:10px;line-height:1.75;max-width:520px;}
+.group-count{
+  font-family:'Cormorant',serif;font-size:56px;font-weight:300;
+  color:rgba(0,0,0,.06);line-height:1;text-align:right;flex-shrink:0;
+}
+
+/* PEOPLE GRID */
+.people-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+  gap:20px;
+}
+.person-card{
+  border-radius:var(--radius);overflow:hidden;
+  border:1.5px solid rgba(0,0,0,.07);
+  background:#fff;
+  transition:all .3s cubic-bezier(.16,1,.3,1);
+  cursor:none;
+}
+.person-card:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(0,0,0,.1);border-color:transparent;}
+.pc-photo{
+  aspect-ratio:1/1;overflow:hidden;position:relative;
+  background:var(--cream);
+  display:flex;align-items:center;justify-content:center;
+}
+.pc-photo img{width:100%;height:100%;object-fit:cover;object-position:center top;transition:transform .5s cubic-bezier(.16,1,.3,1);}
+.person-card:hover .pc-photo img{transform:scale(1.06);}
+.pc-initials{
+  font-family:'Cormorant',serif;font-size:40px;font-weight:300;font-style:italic;
+  color:rgba(0,0,0,.15);user-select:none;
+}
+.pc-flag{
+  position:absolute;top:10px;right:10px;
+  width:28px;height:28px;border-radius:50%;
+  background:rgba(253,248,242,.92);backdrop-filter:blur(6px);
+  display:flex;align-items:center;justify-content:center;font-size:14px;
+}
+.pc-body{padding:14px 16px;}
+.pc-name{font-size:15px;font-weight:600;color:var(--dark);margin-bottom:2px;}
+.pc-role{font-size:11px;letter-spacing:.06em;color:var(--mid);}
+.pc-location{display:flex;align-items:center;gap:4px;margin-top:6px;font-size:12px;color:var(--mid);}
+.pc-tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:8px;}
+.pc-tag{font-size:10px;font-weight:500;padding:2px 8px;border-radius:10px;border:1px solid;}
+
+/* ADD PERSON CARD */
+.add-person-card{
+  border-radius:var(--radius);border:1.5px dashed rgba(0,0,0,.12);
+  background:rgba(0,0,0,.015);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:8px;padding:32px 16px;cursor:none;
+  transition:all .2s;aspect-ratio:auto;min-height:180px;
+}
+.add-person-card:hover{background:rgba(0,0,0,.03);border-color:rgba(0,0,0,.2);}
+.add-icon{font-size:28px;opacity:.3;}
+.add-label{font-size:13px;color:var(--mid);text-align:center;}
+
+/* QUOTE STRIP between groups */
+.quote-strip{
+  margin:64px 0;padding:32px 40px;border-radius:var(--radius);
+  background:linear-gradient(135deg,#1a0c04,#2D1B0E);
+  display:flex;align-items:center;gap:24px;flex-wrap:wrap;
+}
+.qs-text{
+  font-family:'Cormorant',serif;font-size:22px;font-weight:300;font-style:italic;
+  color:rgba(255,255,255,.8);line-height:1.5;flex:1;
+}
+.qs-text em{color:var(--yellow);}
+
+/* HERO NOTE */
+.hero-note{
+  padding:40px;border-radius:var(--radius);
+  background:linear-gradient(135deg,var(--coral-l),var(--pink-l));
+  border:1.5px solid rgba(232,86,58,.12);
+  display:flex;align-items:center;gap:28px;flex-wrap:wrap;
+  margin-bottom:0;
+}
+.hn-icon{font-size:48px;flex-shrink:0;}
+.hn-title{font-family:'Cormorant',serif;font-size:28px;font-weight:400;margin-bottom:6px;}
+.hn-desc{font-size:15px;color:var(--mid);line-height:1.7;}
+
+@media(max-width:900px){
+  .page-inner{padding:0 20px 72px;}
+  .people-grid{grid-template-columns:repeat(2,1fr);}
+  .group-header{flex-direction:column;}
+  .group-count{display:none;}
+  .quote-strip{flex-direction:column;}
+  .hero-note{flex-direction:column;}
+}
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+
+<nav class="main-nav light" id="main-nav">
+  <a href="index.html" class="nav-logo">S & S</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="story.html">Our Story</a>
+    <a href="people.html" class="active">Our People</a>
+    <a href="highlights.html">Highlights</a>
+    <a href="travel.html">Travel</a>
+    <a href="attire.html">Attire</a>
+    <a href="index.html#rsvp" class="nav-rsvp">RSVP</a>
+  </div>
+  <div class="hamburger" id="ham" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mmenu">
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="story.html" onclick="closeMenu()">Our Story</a>
+  <a href="people.html" onclick="closeMenu()">Our People</a>
+  <a href="highlights.html" onclick="closeMenu()">Highlights</a>
+  <a href="travel.html" onclick="closeMenu()">Travel</a>
+  <a href="attire.html" onclick="closeMenu()">Attire</a>
+  <a href="index.html#rsvp" onclick="closeMenu()" style="color:var(--coral)">RSVP →</a>
+</div>
+
+<!-- HERO -->
+<div class="sub-hero" style="padding-top:var(--nav-h);background:linear-gradient(140deg,#1a0c04 0%,#2D1B0E 40%,#4A2510 80%,#7A3015 100%);">
+  <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(232,86,58,.07) 1px,transparent 1px);background-size:24px 24px;"></div>
+  <div class="sub-hero-content">
+    <div class="sub-breadcrumb"><a href="index.html">Home</a><span>/</span><span>Our People</span></div>
+    <div class="sub-eyebrow">The ones who matter most</div>
+    <h1 class="sub-title">Our <em>People</em></h1>
+    <p class="sub-desc">Every wedding is really a gathering of the people who shaped the couple. Meet the friends and family who make Sanket & Sneha who they are.</p>
+    <div class="sub-hero-ctas">
+      <a href="#sanket-friends" class="btn-primary">Sanket's squad</a>
+      <a href="#sneha-friends" class="btn-outline-white">Sneha's squad</a>
+    </div>
+  </div>
+</div>
+
+<div class="page-body">
+<div class="page-inner">
+
+  <!-- INTRO NOTE -->
+  <div class="hero-note reveal" style="margin-top:72px;">
+    <div class="hn-icon">🫂</div>
+    <div>
+      <div class="hn-title">A wedding is a village</div>
+      <div class="hn-desc">This page is a love letter to the people flying in from Amsterdam, Italy, and across India to celebrate with us. Add photos, locations, and fun facts about everyone here — it's a great way for the two groups to get to know each other before the wedding!</div>
+    </div>
+  </div>
+
+  <!-- ═══════════ SANKET'S FRIENDS ═══════════ -->
+  <div id="sanket-friends" class="group-anchor"></div>
+  <div class="group-section">
+    <div class="group-header">
+      <div class="gh-left reveal-left">
+        <span class="gh-badge badge-sanket-friends">🧡 Sanket's Friends</span>
+        <h2 class="group-title">Sanket's <em>Squad</em></h2>
+        <p class="group-desc">The crew who've been there through everything — the chaos, the laughs, the late nights. Add your people here and let everyone know who's who.</p>
+      </div>
+      <div class="group-count reveal-right">S</div>
+    </div>
+    <div class="people-grid">
+
+      <!-- FRIEND TEMPLATE — duplicate and fill in -->
+      <div class="person-card reveal d1">
+        <div class="pc-photo">
+          <div class="pc-initials">A</div>
+          <div class="pc-flag">🇳🇱</div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Friend Name</div>
+          <div class="pc-role">How they know Sanket</div>
+          <div class="pc-location">📍 Amsterdam</div>
+          <div class="pc-tags">
+            <span class="pc-tag" style="border-color:var(--coral);color:var(--coral)">AMS crew</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="person-card reveal d2">
+        <div class="pc-photo">
+          <div class="pc-initials">B</div>
+          <div class="pc-flag">🇳🇱</div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Friend Name</div>
+          <div class="pc-role">How they know Sanket</div>
+          <div class="pc-location">📍 Amsterdam</div>
+          <div class="pc-tags">
+            <span class="pc-tag" style="border-color:var(--coral);color:var(--coral)">AMS crew</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="person-card reveal d3">
+        <div class="pc-photo">
+          <div class="pc-initials">C</div>
+          <div class="pc-flag">🇮🇹</div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Friend Name</div>
+          <div class="pc-role">How they know Sanket</div>
+          <div class="pc-location">📍 Italy</div>
+          <div class="pc-tags">
+            <span class="pc-tag" style="border-color:var(--purple-d);color:var(--purple-d)">Italy crew</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="person-card reveal d4">
+        <div class="pc-photo">
+          <div class="pc-initials">D</div>
+          <div class="pc-flag">🇮🇳</div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Friend Name</div>
+          <div class="pc-role">How they know Sanket</div>
+          <div class="pc-location">📍 India</div>
+          <div class="pc-tags">
+            <span class="pc-tag" style="border-color:var(--lime-d);color:var(--lime-d)">India</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="add-person-card reveal d5">
+        <div class="add-icon">➕</div>
+        <div class="add-label">Add more of<br>Sanket's friends</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="quote-strip reveal">
+    <div class="qs-text">"The best kind of friends are those who show up across time zones and oceans — just to celebrate <em>love.</em>"</div>
+    <a href="travel.html" class="btn-outline-white">Travel guide →</a>
+  </div>
+
+  <!-- ═══════════ SNEHA'S FRIENDS ═══════════ -->
+  <div id="sneha-friends" class="group-anchor"></div>
+  <div class="group-section">
+    <div class="group-header">
+      <div class="gh-left reveal-left">
+        <span class="gh-badge badge-sneha-friends">💕 Sneha's Friends</span>
+        <h2 class="group-title">Sneha's <em>Crew</em></h2>
+        <p class="group-desc">Sneha's ride-or-dies — the ones who've seen every version of her and love her through all of it. Add your people here.</p>
+      </div>
+      <div class="group-count reveal-right">S</div>
+    </div>
+    <div class="people-grid">
+
+      <div class="person-card reveal d1">
+        <div class="pc-photo">
+          <div class="pc-initials">A</div>
+          <div class="pc-flag">🇮🇳</div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Friend Name</div>
+          <div class="pc-role">How they know Sneha</div>
+          <div class="pc-location">📍 Pune</div>
+          <div class="pc-tags">
+            <span class="pc-tag" style="border-color:var(--pink-d);color:var(--pink-d)">Bestie</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="person-card reveal d2">
+        <div class="pc-photo">
+          <div class="pc-initials">B</div>
+          <div class="pc-flag">🇮🇳</div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Friend Name</div>
+          <div class="pc-role">How they know Sneha</div>
+          <div class="pc-location">📍 Mumbai</div>
+          <div class="pc-tags">
+            <span class="pc-tag" style="border-color:var(--pink-d);color:var(--pink-d)">College friend</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="person-card reveal d3">
+        <div class="pc-photo">
+          <div class="pc-initials">C</div>
+          <div class="pc-flag">🇮🇳</div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Friend Name</div>
+          <div class="pc-role">How they know Sneha</div>
+          <div class="pc-location">📍 Pune</div>
+          <div class="pc-tags">
+            <span class="pc-tag" style="border-color:var(--coral);color:var(--coral)">Work friend</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="add-person-card reveal d4">
+        <div class="add-icon">➕</div>
+        <div class="add-label">Add more of<br>Sneha's friends</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ═══════════ SANKET'S FAMILY ═══════════ -->
+  <div id="sanket-family" class="group-anchor"></div>
+  <div class="group-section">
+    <div class="group-header">
+      <div class="gh-left reveal-left">
+        <span class="gh-badge badge-sanket-fam">💛 Sanket's Family</span>
+        <h2 class="group-title">Sanket's <em>Family</em></h2>
+        <p class="group-desc">The people who raised Sanket, shaped him, and have been waiting for this day. Add family members here so everyone can put faces to names.</p>
+      </div>
+      <div class="group-count reveal-right">♥</div>
+    </div>
+    <div class="people-grid">
+
+      <div class="person-card reveal d1">
+        <div class="pc-photo" style="background:var(--yellow-l)">
+          <div class="pc-initials" style="color:var(--yellow-d)">M</div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Sanket's Mother</div>
+          <div class="pc-role">The heart of the family</div>
+          <div class="pc-location">📍 Add city</div>
+          <div class="pc-tags">
+            <span class="pc-tag" style="border-color:var(--yellow-d);color:var(--yellow-d)">Mother</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="person-card reveal d2">
+        <div class="pc-photo" style="background:var(--yellow-l)">
+          <div class="pc-initials" style="color:var(--yellow-d)">F</div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Sanket's Father</div>
+          <div class="pc-role">The proud dad</div>
+          <div class="pc-location">📍 Add city</div>
+          <div class="pc-tags">
+            <span class="pc-tag" style="border-color:var(--yellow-d);color:var(--yellow-d)">Father</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="person-card reveal d3">
+        <div class="pc-photo" style="background:var(--yellow-l)">
+          <div class="pc-initials" style="color:var(--yellow-d)">S</div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Add sibling / relative</div>
+          <div class="pc-role">Relation to Sanket</div>
+          <div class="pc-location">📍 Add city</div>
+          <div class="pc-tags">
+            <span class="pc-tag" style="border-color:var(--yellow-d);color:var(--yellow-d)">Family</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="add-person-card reveal d4">
+        <div class="add-icon">➕</div>
+        <div class="add-label">Add more of<br>Sanket's family</div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="quote-strip reveal" style="background:linear-gradient(135deg,#0E1A2D,#1A2D4A)">
+    <div class="qs-text">"Family is not an important thing — it's <em>everything.</em>"</div>
+    <a href="index.html#rsvp" class="btn-primary">RSVP now →</a>
+  </div>
+
+  <!-- ═══════════ SNEHA'S FAMILY ═══════════ -->
+  <div id="sneha-family" class="group-anchor"></div>
+  <div class="group-section">
+    <div class="group-header">
+      <div class="gh-left reveal-left">
+        <span class="gh-badge badge-sneha-fam">💜 Sneha's Family</span>
+        <h2 class="group-title">Sneha's <em>Family</em></h2>
+        <p class="group-desc">The family who raised Sneha, nurtured her, and are overjoyed to welcome Sanket. Add family members and fun facts about each one.</p>
+      </div>
+      <div class="group-count reveal-right">♥</div>
+    </div>
+    <div class="people-grid">
+
+      <div class="person-card reveal d1">
+        <div class="pc-photo" style="background:var(--purple-l)">
+          <div class="pc-initials" style="color:var(--purple-d)">M</div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Sneha's Mother</div>
+          <div class="pc-role">The heart of the family</div>
+          <div class="pc-location">📍 Add city</div>
+          <div class="pc-tags">
+            <span class="pc-tag" style="border-color:var(--purple-d);color:var(--purple-d)">Mother</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="person-card reveal d2">
+        <div class="pc-photo" style="background:var(--purple-l)">
+          <div class="pc-initials" style="color:var(--purple-d)">F</div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Sneha's Father</div>
+          <div class="pc-role">The proud dad</div>
+          <div class="pc-location">📍 Add city</div>
+          <div class="pc-tags">
+            <span class="pc-tag" style="border-color:var(--purple-d);color:var(--purple-d)">Father</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="person-card reveal d3">
+        <div class="pc-photo" style="background:var(--purple-l)">
+          <div class="pc-initials" style="color:var(--purple-d)">S</div>
+        </div>
+        <div class="pc-body">
+          <div class="pc-name">Add sibling / relative</div>
+          <div class="pc-role">Relation to Sneha</div>
+          <div class="pc-location">📍 Add city</div>
+          <div class="pc-tags">
+            <span class="pc-tag" style="border-color:var(--purple-d);color:var(--purple-d)">Family</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="add-person-card reveal d4">
+        <div class="add-icon">➕</div>
+        <div class="add-label">Add more of<br>Sneha's family</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BOTTOM CTA -->
+  <div style="margin-top:72px;padding:48px;border-radius:24px;text-align:center;background:linear-gradient(135deg,#1a0c04,#2D1B0E);" class="reveal">
+    <p style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-bottom:14px">24 & 25 November 2026</p>
+    <h2 style="font-family:'Cormorant',serif;font-size:52px;font-weight:300;color:#fff;margin-bottom:14px">See you <em style="font-style:italic;color:var(--yellow)">all there!</em></h2>
+    <p style="font-size:16px;color:rgba(255,255,255,.45);margin-bottom:32px;">Marigold Banquets, Pune · Please RSVP by 1 October 2026</p>
+    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
+      <a href="index.html#rsvp" class="btn-primary">Send RSVP →</a>
+      <a href="travel.html" class="btn-outline-white">Travel guide →</a>
+    </div>
+  </div>
+
+</div>
+</div>
+
+<footer class="main-footer">
+  <div class="footer-logo">Sanket & Sneha</div>
+  <div class="footer-meta">24–25 November 2026 · Marigold Banquets, Pune</div>
+  <div class="footer-links">
+    <a href="story.html">Our Story</a><a href="people.html">Our People</a>
+    <a href="highlights.html">Highlights</a><a href="travel.html">Travel</a><a href="index.html#rsvp">RSVP</a>
+  </div>
+</footer>
+<script src="shared.js"></script>
+</body>
+</html>
