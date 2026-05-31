@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Celebration Highlights — Sanket & Sneha</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="shared.css">
+<style>
+.sub-hero{background:linear-gradient(140deg,#1a0c04 0%,#3D1E0C 50%,#7A3A1A 100%);}
+.sub-hero-overlay{background:linear-gradient(to right,rgba(26,12,4,.6),transparent);}
+.page-body{background:#fff;padding:80px 48px;}
+.page-inner{max-width:1060px;margin:0 auto;}
+
+/* RITUAL CARDS */
+.ritual-section{margin-bottom:80px;}
+.ritual-section:last-child{margin-bottom:0;}
+.ritual-anchor{display:block;position:relative;top:calc(-1 * var(--nav-h) - 20px);}
+.ritual-header{display:grid;grid-template-columns:1fr auto;align-items:start;gap:24px;margin-bottom:40px;padding-bottom:28px;border-bottom:1px solid rgba(0,0,0,.07);}
+.rh-left{}
+.rh-day-badge{display:inline-flex;align-items:center;gap:8px;padding:5px 14px;border-radius:20px;font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;margin-bottom:12px;}
+.rh-day-badge.day1{background:rgba(232,86,58,.1);color:var(--coral);}
+.rh-day-badge.day2{background:rgba(107,191,58,.1);color:var(--lime-d);}
+.rh-title{font-family:'Cormorant',serif;font-size:clamp(36px,5vw,60px);font-weight:300;line-height:1.05;}
+.rh-title em{font-style:italic;color:var(--coral);}
+.rh-time-card{padding:20px 24px;border-radius:var(--radius);background:var(--cream);border:1.5px solid rgba(0,0,0,.07);text-align:center;min-width:140px;}
+.rh-time-card .t{font-family:'Cormorant',serif;font-size:28px;font-weight:400;color:var(--dark);line-height:1;}
+.rh-time-card .tl{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--mid);margin-top:4px;}
+
+/* EVENT GRID */
+.event-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-bottom:32px;}
+.event-card{border-radius:var(--radius);overflow:hidden;border:1.5px solid rgba(0,0,0,.07);background:#fff;transition:all .3s cubic-bezier(.16,1,.3,1);}
+.event-card:hover{transform:translateY(-5px);box-shadow:0 20px 48px rgba(0,0,0,.1);border-color:transparent;}
+.ec-top{padding:24px;display:flex;gap:14px;align-items:flex-start;}
+.ec-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.ec-tag{font-size:10px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;margin-bottom:4px;}
+.ec-title{font-family:'Cormorant',serif;font-size:20px;font-weight:400;}
+.ec-body{padding:0 24px 24px;}
+.ec-body p{font-size:14px;color:var(--mid);line-height:1.75;}
+.ec-footer{padding:14px 24px;border-top:1px solid rgba(0,0,0,.05);background:rgba(0,0,0,.02);display:flex;align-items:center;gap:8px;font-size:12px;color:var(--mid);}
+
+/* ATTIRE STRIP */
+.attire-strip{padding:28px 32px;border-radius:var(--radius);margin-top:28px;display:flex;align-items:center;gap:24px;flex-wrap:wrap;}
+.as-icon{font-size:32px;flex-shrink:0;}
+.as-title{font-size:16px;font-weight:600;margin-bottom:4px;}
+.as-desc{font-size:14px;color:var(--mid);line-height:1.65;}
+.as-chips{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;}
+.as-chip{font-size:12px;font-weight:500;padding:4px 12px;border-radius:20px;border:1.5px solid;}
+
+/* TIPS BOX */
+.tips-box{padding:28px 32px;border-radius:var(--radius);background:var(--cream);border:1.5px solid rgba(0,0,0,.07);margin-top:28px;}
+.tips-box h4{font-size:15px;font-weight:600;margin-bottom:14px;display:flex;align-items:center;gap:8px;}
+.tip-row{display:flex;gap:10px;align-items:flex-start;margin-bottom:10px;font-size:14px;color:var(--mid);line-height:1.6;}
+.tip-row:last-child{margin-bottom:0;}
+.tip-row::before{content:'→';color:var(--coral);font-weight:600;flex-shrink:0;margin-top:1px;}
+
+/* SECTION DIVIDER */
+.ritual-divider{height:1px;background:linear-gradient(to right,transparent,rgba(0,0,0,.1),transparent);margin:60px 0;}
+
+@media(max-width:900px){
+  .page-body{padding:52px 20px;}
+  .event-grid{grid-template-columns:1fr;}
+  .ritual-header{grid-template-columns:1fr;}
+  .rh-time-card{display:none;}
+  .attire-strip{flex-direction:column;align-items:flex-start;}
+}
+</style>
+</head>
+<body>
+<div id="cursor"></div><div id="cursor-ring"></div>
+
+<nav class="main-nav light" id="main-nav">
+  <a href="index.html" class="nav-logo">S & S</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="highlights.html" class="active">Highlights</a>
+    <a href="travel.html">Travel</a>
+    <a href="attire.html">Attire</a>
+    <a href="index.html#rsvp" class="nav-rsvp">RSVP</a>
+  </div>
+  <div class="hamburger" id="ham" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+</nav>
+<div class="mobile-menu" id="mmenu">
+  <a href="index.html" onclick="closeMenu()">Home</a>
+  <a href="highlights.html" onclick="closeMenu()">Highlights</a>
+  <a href="travel.html" onclick="closeMenu()">Travel</a>
+  <a href="attire.html" onclick="closeMenu()">Attire</a>
+  <a href="index.html#rsvp" onclick="closeMenu()" style="color:var(--coral)">RSVP →</a>
+</div>
+
+<div class="sub-hero" style="padding-top:var(--nav-h)">
+  <div class="sub-hero-bg" style="background:linear-gradient(140deg,#1a0c04 0%,#3D1E0C 50%,#7A3A1A 100%)"></div>
+  <div class="sub-hero-overlay" style="position:absolute;inset:0;background:linear-gradient(to right,rgba(26,12,4,.5),transparent)"></div>
+  <div class="sub-hero-content">
+    <div class="sub-breadcrumb"><a href="index.html">Home</a><span>/</span><span>Celebration Highlights</span></div>
+    <div class="sub-eyebrow">24 & 25 November 2025</div>
+    <h1 class="sub-title">Celebration<br><em>Highlights</em></h1>
+    <p class="sub-desc">Every ritual, every moment, every detail — your complete guide to Sanket & Sneha's two-day wedding celebration.</p>
+    <div class="sub-hero-ctas">
+      <a href="#haldi" class="btn-primary">Explore Day 1</a>
+      <a href="#vidhi" class="btn-outline-white">Explore Day 2</a>
+    </div>
+  </div>
+</div>
+
+<div class="page-body">
+<div class="page-inner">
+
+  <!-- DAY 1 -->
+  <div id="haldi" class="ritual-anchor"></div>
+  <div class="ritual-section reveal">
+    <div class="ritual-header">
+      <div class="rh-left">
+        <span class="rh-day-badge day1">Day 1 · Monday, 24 November</span>
+        <h2 class="rh-title">Haldi & <em>Sangeet</em></h2>
+      </div>
+      <div class="rh-time-card"><div class="t">4pm</div><div class="tl">Until midnight</div></div>
+    </div>
+
+    <div class="event-grid">
+      <div class="event-card d1">
+        <div class="ec-top">
+          <div class="ec-icon" style="background:var(--yellow-l)">🌿</div>
+          <div>
+            <div class="ec-tag" style="color:var(--yellow-d)">Haldi · 4:00 PM</div>
+            <div class="ec-title">Haldi Ceremony</div>
+          </div>
+        </div>
+        <div class="ec-body">
+          <p>A joyful turmeric ritual to bless and beautify the couple before their wedding. Turmeric paste is applied by family and friends amid laughter, music, and colour.</p>
+        </div>
+        <div class="ec-footer">🕓 4:00 PM · Marigold Banquets</div>
+      </div>
+      <div class="event-card d2">
+        <div class="ec-top">
+          <div class="ec-icon" style="background:var(--coral-l)">🎶</div>
+          <div>
+            <div class="ec-tag" style="color:var(--coral)">Sangeet · Evening</div>
+            <div class="ec-title">Sangeet Night</div>
+          </div>
+        </div>
+        <div class="ec-body">
+          <p>An evening of music, dance, and performances. Family and friends perform songs and dances for the couple. A night of pure joy and celebration.</p>
+        </div>
+        <div class="ec-footer">🕖 Evening · Marigold Banquets</div>
+      </div>
+      <div class="event-card d3">
+        <div class="ec-top">
+          <div class="ec-icon" style="background:var(--pink-l)">🍽️</div>
+          <div>
+            <div class="ec-tag" style="color:var(--pink-d)">Dinner · Night</div>
+            <div class="ec-title">Celebratory Dinner</div>
+          </div>
+        </div>
+        <div class="ec-body">
+          <p>A festive dinner with family and friends. Food, laughter, and the first toast to the couple as the evening continues until midnight.</p>
+        </div>
+        <div class="ec-footer">🕙 Night · Until 12am</div>
+      </div>
+    </div>
+
+    <div class="attire-strip" style="background:var(--yellow-l);border:1.5px solid rgba(245,166,35,.25)">
+      <div class="as-icon">👗</div>
+      <div>
+        <div class="as-title">What to wear — Day 1</div>
+        <div class="as-desc"><strong>Haldi:</strong> Light, bright cotton in yellow, orange, or white. You will get turmeric on you — dress accordingly! Old clothes you love.<br><strong>Sangeet:</strong> Festive and colourful. Lehenga, saree, or anarkali for women. Kurta-pyjama or sherwani for men.</div>
+        <div class="as-chips">
+          <span class="as-chip" style="border-color:var(--yellow-d);color:var(--yellow-d)">Yellow</span>
+          <span class="as-chip" style="border-color:var(--coral);color:var(--coral)">Orange</span>
+          <span class="as-chip" style="border-color:var(--pink-d);color:var(--pink-d)">Pink</span>
+          <span class="as-chip" style="border-color:var(--lime-d);color:var(--lime-d)">Green</span>
+        </div>
+      </div>
+      <a href="attire.html#day1" class="btn-outline-dark" style="white-space:nowrap">Full attire guide →</a>
+    </div>
+
+    <div class="tips-box">
+      <h4>💡 Tips for Day 1</h4>
+      <div class="tip-row">Arrive by 3:45 PM for the Haldi — it starts promptly at 4:00 PM.</div>
+      <div class="tip-row">Wear clothes you don't mind getting turmeric on. Bring a change of outfit for Sangeet.</div>
+      <div class="tip-row">Leave valuables at the hotel — things can get messy during Haldi!</div>
+      <div class="tip-row">The Sangeet has open seating — find your group and enjoy the performances.</div>
+    </div>
+  </div>
+
+  <div class="ritual-divider"></div>
+
+  <!-- DAY 2 -->
+  <div id="vidhi" class="ritual-anchor"></div>
+  <div class="ritual-section reveal">
+    <div class="ritual-header">
+      <div class="rh-left">
+        <span class="rh-day-badge day2">Day 2 · Tuesday, 25 November</span>
+        <h2 class="rh-title">Vidhi, Wedding <em>& Reception</em></h2>
+      </div>
+      <div class="rh-time-card"><div class="t">9am</div><div class="tl">Until 5pm</div></div>
+    </div>
+
+    <div class="event-grid">
+      <div class="event-card reveal d1">
+        <div class="ec-top">
+          <div class="ec-icon" style="background:var(--lime-l)">🙏</div>
+          <div>
+            <div class="ec-tag" style="color:var(--lime-d)">Vidhi · 9:00 AM</div>
+            <div class="ec-title">Sacred Rituals</div>
+          </div>
+        </div>
+        <div class="ec-body">
+          <p>Traditional Hindu pre-wedding rituals performed with the priest. Sacred ceremonies that prepare and bless the couple for their new journey together.</p>
+        </div>
+        <div class="ec-footer">🕘 9:00 AM · Please arrive by 8:45</div>
+      </div>
+      <div id="wedding" class="event-card reveal d2">
+        <div class="ec-top">
+          <div class="ec-icon" style="background:var(--coral-l)">💍</div>
+          <div>
+            <div class="ec-tag" style="color:var(--coral)">Wedding · 12:15 PM</div>
+            <div class="ec-title">The Wedding Ceremony</div>
+          </div>
+        </div>
+        <div class="ec-body">
+          <p>Sanket and Sneha exchange vows in a beautiful traditional ceremony. The most sacred moment of the two days — be seated by 12:00 PM.</p>
+        </div>
+        <div class="ec-footer">🕛 12:15 PM · Be seated by noon</div>
+      </div>
+      <div id="reception" class="event-card reveal d3">
+        <div class="ec-top">
+          <div class="ec-icon" style="background:var(--purple-l)">🥂</div>
+          <div>
+            <div class="ec-tag" style="color:var(--purple-d)">Reception · 2:00 PM</div>
+            <div class="ec-title">Wedding Reception</div>
+          </div>
+        </div>
+        <div class="ec-body">
+          <p>Celebrate the newlyweds! An afternoon of incredible food, toasts, photos, and dancing to close out this unforgettable two days.</p>
+        </div>
+        <div class="ec-footer">🕑 2:00 PM – 5:00 PM</div>
+      </div>
+    </div>
+
+    <div class="attire-strip" style="background:var(--coral-l);border:1.5px solid rgba(232,86,58,.2)">
+      <div class="as-icon">✨</div>
+      <div>
+        <div class="as-title">What to wear — Day 2</div>
+        <div class="as-desc">Formal Indian or Western for both ceremony and reception. Saree, lehenga, or salwar suit for women. Sherwani, suit, or formal kurta for men. Bright colours are strongly encouraged — this is a celebration!</div>
+        <div class="as-chips">
+          <span class="as-chip" style="border-color:var(--coral);color:var(--coral)">Saree</span>
+          <span class="as-chip" style="border-color:var(--purple-d);color:var(--purple-d)">Lehenga</span>
+          <span class="as-chip" style="border-color:var(--lime-d);color:var(--lime-d)">Sherwani</span>
+          <span class="as-chip" style="border-color:var(--pink-d);color:var(--pink-d)">Formal suit</span>
+        </div>
+      </div>
+      <a href="attire.html#day2" class="btn-outline-dark" style="white-space:nowrap">Full attire guide →</a>
+    </div>
+
+    <div class="tips-box">
+      <h4>💡 Tips for Day 2</h4>
+      <div class="tip-row">Arrive by 8:45 AM for Vidhi — the rituals begin promptly at 9:00 AM.</div>
+      <div class="tip-row">Be fully seated for the wedding ceremony by 12:00 PM.</div>
+      <div class="tip-row">Dress formally — this is the main wedding day. Bright, festive colours are encouraged!</div>
+      <div class="tip-row">Photos with the couple will happen after the ceremony and during reception.</div>
+      <div class="tip-row">Reception ends at 5:00 PM. Pre-book your return cab in advance.</div>
+    </div>
+  </div>
+
+  <!-- RSVP CTA -->
+  <div style="margin-top:72px;padding:48px;border-radius:24px;background:linear-gradient(135deg,#2D1B0E,#4A2510);text-align:center;" class="reveal">
+    <p style="font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:14px">Don't miss a moment</p>
+    <h2 style="font-family:'Cormorant',serif;font-size:48px;font-weight:300;color:#fff;margin-bottom:12px">Ready to <em style="font-style:italic;color:var(--yellow)">celebrate?</em></h2>
+    <p style="font-size:16px;color:rgba(255,255,255,.5);margin-bottom:32px">RSVP by 1 October 2025</p>
+    <a href="index.html#rsvp" class="btn-primary">Send your RSVP →</a>
+  </div>
+
+</div>
+</div>
+
+<footer class="main-footer">
+  <div class="footer-logo">Sanket & Sneha</div>
+  <div class="footer-meta">24–25 November 2025 · Marigold Banquets, Pune</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="travel.html">Travel</a>
+    <a href="attire.html">Attire</a><a href="index.html#rsvp">RSVP</a>
+  </div>
+</footer>
+<script src="shared.js"></script>
+</body>
+</html>
